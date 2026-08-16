@@ -134,12 +134,25 @@ function Marker({ progress }: { progress: MotionValue<number> }) {
   // to carry it from the first node to the last.
   return (
     <motion.span style={{ x, opacity }} className="absolute left-0 top-0 block w-full">
-      <span className="absolute -top-4 left-0 flex -translate-x-1/2 gap-[2px] bg-signal p-[3px]">
-        {[0, 1, 2, 3].map((i) => (
-          <span key={i} className="block h-2 w-[2px] bg-ink" />
-        ))}
+      <span className="absolute -top-4 left-0 -translate-x-1/2">
+        <ShipGlyph className="h-3.5 w-6" />
       </span>
     </motion.span>
+  );
+}
+
+/** The marker riding the lane — bow forward, same direction as the route. */
+function ShipGlyph({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 14"
+      className={className}
+      fill="var(--color-signal)"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d="M2 12 2 9 9 9 9 5 16 5 16 9 18 9 23 10.5 18 12Z" />
+    </svg>
   );
 }
 
