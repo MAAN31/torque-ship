@@ -1,0 +1,167 @@
+@import "tailwindcss";
+
+/* ============================================================================
+   THEME TOKENS — "The Manifest"
+   Dark technical base, one signal colour. Signal amber is reserved for CTAs,
+   stamps and live data. It is never used decoratively; if you find yourself
+   reaching for it to make something look nicer, that is the bug.
+============================================================================ */
+
+@theme {
+  /* Base — graphite stack, darkest to lightest */
+  --color-ink: #08090b;
+  --color-graphite: #0e1013;
+  --color-panel: #141719;
+  --color-steel: #23272d;
+  --color-steel-hi: #363c45;
+
+  /* Type */
+  --color-paper: #e9ecef; /* 17.2:1 on ink  — AAA */
+  --color-mist: #9aa2ac; /*  7.8:1 on ink  — AA  */
+  --color-faint: #6b7280; /*  4.6:1 on ink  — AA large / non-essential only */
+
+  /* Signal — CTAs, stamps, live values. 12.4:1 on ink. */
+  --color-signal: #ffc300;
+  --color-signal-deep: #d9a600;
+  --color-signal-wash: rgb(255 195 0 / 0.08);
+
+  /* Exception state only — held cargo, errors. 5.1:1 on ink. */
+  --color-flag: #ff6a4d;
+
+  --font-display: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "SF Mono", Menlo, monospace;
+
+  --radius-none: 0px;
+}
+
+/* ============================================================================
+   BASE
+============================================================================ */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Sticky nav offset so anchor targets are never hidden under the header. */
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv01";
+    -webkit-font-smoothing: antialiased;
+    /* Clears the mobile sticky CTA bar so it never covers page-end content. */
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Single global focus treatment. High contrast, never removed. */
+  :focus-visible {
+    outline: 2px solid var(--color-signal);
+    outline-offset: 3px;
+    border-radius: 1px;
+  }
+
+  ::selection {
+    background: var(--color-signal);
+    color: var(--color-ink);
+  }
+
+  /* Mono numerals should line up in columns — this is a document. */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* ============================================================================
+   MANIFEST PRIMITIVES
+============================================================================ */
+
+@utility rule-x {
+  /* Hairline document rule. Uses a gradient so it stays crisp at 1 device px. */
+  background-image: linear-gradient(to right, var(--color-steel), var(--color-steel));
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+}
+
+/* The ruled ledger field the whole site is built from. */
+@utility manifest-grid {
+  background-image:
+    linear-gradient(to right, rgb(35 39 45 / 0.55) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(35 39 45 / 0.55) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+/* Diagonal hazard hatching — used only on exception/placeholder blocks. */
+@utility hatch {
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgb(255 195 0 / 0.07) 0px,
+    rgb(255 195 0 / 0.07) 6px,
+    transparent 6px,
+    transparent 13px
+  );
+}
+
+/* ============================================================================
+   MOTION
+   Every animated element also has a static resting state that is complete on
+   its own. Reduced motion does not degrade the design, it just arrives.
+============================================================================ */
+
+@keyframes ts-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+@keyframes ts-scan {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(400%);
+  }
+}
+
+.live-dot {
+  animation: ts-blink 2s steps(1, end) infinite;
+}
+
+.scanline {
+  animation: ts-scan 6s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  /* Blanket kill switch. Framer Motion is separately gated via useReducedMotion
+     in lib/motion.ts, but this catches CSS animation and any third-party stray. */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .live-dot,
+  .scanline {
+    animation: none !important;
+    opacity: 1;
+  }
+
+  .scanline {
+    display: none;
+  }
+}
