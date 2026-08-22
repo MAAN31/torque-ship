@@ -5,7 +5,6 @@ import { Section, SectionHead } from "@/components/system/Section";
 import { TrustPoints } from "@/components/why/TrustPoints";
 import { TestimonialPlaceholder } from "@/components/why/TestimonialPlaceholder";
 import { QuoteEstimator } from "@/components/quote/QuoteEstimator";
-import { StatBlock } from "@/components/system/StatBlock";
 
 export const metadata: Metadata = {
   title: "Why Me",
@@ -29,36 +28,6 @@ export default function WhyPage() {
       {/* Trust points ------------------------------------------------------ */}
       <Section className="pb-16 sm:pb-24">
         <TrustPoints />
-      </Section>
-
-      {/* Figures — every one unverified, and it looks it -------------------- */}
-      <Section className="py-14 sm:py-20">
-        <div className="flex items-baseline gap-4 border-b border-steel pb-3">
-          <span className="font-mono text-[11px] tracking-[0.2em] text-signal tabular">
-            BOX 04
-          </span>
-          <span className="font-mono text-[11px] tracking-[0.2em] text-faint">
-            RECORD OF CARRIAGE
-          </span>
-        </div>
-
-        <div className="mt-px grid grid-cols-2 gap-px bg-steel lg:grid-cols-4 [&>*]:bg-graphite">
-          {why.stats.map((s) => (
-            <StatBlock
-              key={s.label}
-              value={s.value}
-              suffix={s.suffix}
-              label={s.label}
-              placeholder={s.placeholder}
-            />
-          ))}
-        </div>
-
-        <p className="mt-5 font-mono text-[10px] uppercase tracking-[0.16em] text-signal/70">
-          ◆ All four figures are unpublished placeholders. Fill `why.stats` in lib/content.ts and
-          set each `placeholder` to false — do not ship invented numbers on a page about not
-          inventing numbers.
-        </p>
       </Section>
 
       {/* Testimonial slot -------------------------------------------------- */}

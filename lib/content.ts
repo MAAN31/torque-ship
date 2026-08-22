@@ -270,16 +270,8 @@ export const why = {
     },
   ],
 
-  /** Hard numbers. All PLACEHOLDER — do not publish until verified. */
-  stats: [
-    { value: 0, suffix: "+", label: "Containers cleared", placeholder: true },
-    { value: 0, suffix: "", label: "Years in the trade", placeholder: true },
-    { value: 0, suffix: "", label: "Brands on the book", placeholder: true },
-    { value: 0, suffix: "%", label: "On-time to the 3PL window", placeholder: true },
-  ],
-
   testimonial: {
-    box: "05",
+    box: "04",
     kicker: "CONSIGNEE STATEMENT",
     /** Rendered in an explicitly unfilled "awaiting signature" state. */
     placeholder: true,
@@ -289,7 +281,7 @@ export const why = {
   },
 
   estimator: {
-    box: "06",
+    box: "05",
     kicker: "RATE REQUEST",
     title: "Landed cost estimator.",
     subhead:
