@@ -10,7 +10,6 @@ import {
   VOLUMES,
   describe,
   estimate,
-  pct,
   usd,
   type CargoId,
   type Estimate,
@@ -56,7 +55,7 @@ const STEPS: Step[] = [
     key: "cargo",
     box: "02",
     question: "What are you shipping?",
-    helper: "Pick the nearest category. This is what drives your duty rate.",
+    helper: "Pick the nearest category — helps me flag customs quirks before you book.",
     options: CARGOS,
   },
   {
@@ -442,19 +441,6 @@ function Result({
               </span>
             </li>
           ))}
-
-          {/* Duty is a rate, not a figure. See the note in lib/estimator.ts. */}
-          <li className="flex items-baseline justify-between gap-4 bg-panel/60 px-4 py-3">
-            <span className="min-w-0">
-              <span className="block text-[14px] text-paper">Duty & tariffs</span>
-              <span className="block font-mono text-[10px] uppercase tracking-[0.12em] text-faint">
-                Charged on declared value — not included above
-              </span>
-            </span>
-            <span className="shrink-0 font-mono text-[13px] text-signal tabular">
-              {pct(result.dutyLow)}–{pct(result.dutyHigh)}
-            </span>
-          </li>
         </ul>
       </div>
 

@@ -7,15 +7,14 @@
 
    >>> ALL RATES BELOW ARE ILLUSTRATIVE PLACEHOLDERS <<<
    They are in a plausible 2026 band for Asia→US so the tool feels honest, but
-   they are not a quote and the UI says so. Replace `LANE`, `FREIGHT`, `FEES`
-   and `DUTY` with real desk numbers before launch.
+   they are not a quote and the UI says so. Replace `LANE`, `FREIGHT` and
+   `FEES` with real desk numbers before launch.
 
-   Deliberate scope decision: this returns FREIGHT + CLEARANCE + DELIVERY, and
-   reports duty as a RATE rather than a dollar figure. Duty needs a declared
-   commercial value, and the brief fixes the input set at four questions
-   (origin, cargo, volume, urgency). Quoting a duty dollar amount off an
-   invented cargo value would be the exact kind of opaque number this brand
-   exists to argue against.
+   Deliberate scope decision: this returns FREIGHT + CLEARANCE + DELIVERY only
+   — a DDU-style figure (delivered, duty unpaid). Duty and tariffs are not
+   quoted anywhere in this tool: they need a declared commercial value the
+   brief's four-question input set doesn't collect, and the buyer's broker is
+   the right party to price them, not an invented cargo value here.
 ============================================================================ */
 
 /* ------------------------------------------------------------------ inputs */
@@ -121,15 +120,6 @@ const FEES = {
   delivery40: [650, 1100] as Range,
 };
 
-/** Ad-valorem duty band by cargo class, as decimals. Illustrative. */
-const DUTY: Record<CargoId, Range> = {
-  apparel: [0.149, 0.32],
-  electronics: [0.0, 0.039],
-  home: [0.034, 0.065],
-  beauty: [0.0, 0.049],
-  furniture: [0.0, 0.075],
-};
-
 /** Ocean transit, port pair to 3PL door, China baseline. */
 const TRANSIT: Record<UrgencyId, Range> = {
   standard: [32, 42],
@@ -153,8 +143,6 @@ export type Estimate = {
   totalHigh: number;
   transitLow: number;
   transitHigh: number;
-  dutyLow: number;
-  dutyHigh: number;
   mode: string;
   /** Non-empty when the chosen combination deserves a blunt warning. */
   flags: string[];
@@ -167,7 +155,7 @@ const add = (a: Range, b: Range): Range => [a[0] + b[0], a[1] + b[1]];
 const round25 = (n: number) => Math.round(n / 25) * 25;
 
 export function estimate(input: EstimatorInput): Estimate {
-  const { origin, cargo, volume, urgency } = input;
+  const { origin, volume, urgency } = input;
   const lane = LANE[origin];
   const cbm = CBM[volume];
   const fcl = IS_FCL[volume];
@@ -250,13 +238,6 @@ export function estimate(input: EstimatorInput): Estimate {
       "At 12+ CBM you are close to the point where a 20ft container is cheaper per unit than LCL. Worth a two-minute conversation before you book."
     );
   }
-  if (cargo === "apparel") {
-    flags.push(
-      "Apparel duty swings from 0% to 32% on fibre content and construction. Classification is where the money is on this category — send me the tech pack."
-    );
-  }
-
-  const duty = DUTY[cargo];
 
   return {
     lines,
@@ -264,8 +245,6 @@ export function estimate(input: EstimatorInput): Estimate {
     totalHigh: total[1],
     transitLow,
     transitHigh,
-    dutyLow: duty[0],
-    dutyHigh: duty[1],
     mode,
     flags,
   };
@@ -273,8 +252,6 @@ export function estimate(input: EstimatorInput): Estimate {
 
 export const usd = (n: number) =>
   n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
-
-export const pct = (n: number) => `${(n * 100).toFixed(1)}%`;
 
 /** Human-readable summary of the four answers, for the CTA payload. */
 export function describe(input: EstimatorInput): string {

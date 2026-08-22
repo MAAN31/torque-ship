@@ -72,9 +72,11 @@ advances the step, so there is no Next button and no four extra taps. Answers st
 from the result screen and recalculate in place. It is built on native radio inputs, so
 arrow-key navigation and group semantics are correct rather than reimplemented.
 
-**Duty is quoted as a rate, not a dollar figure.** Duty needs a declared commercial value
-and the input set is fixed at four questions. Inventing a cargo value to produce a
-confident-looking total would be the exact opacity this brand exists to argue against.
+**The estimator quotes DDU, not duty-paid.** The number is FREIGHT + CLEARANCE + DELIVERY
+only — delivered, duty unpaid. Duty and tariffs need a declared commercial value the
+brief's four-question input set doesn't collect, and inventing a cargo value to fold a
+confident-looking duty figure into the total would be the exact opacity this brand exists
+to argue against, so the tool doesn't quote duty at all.
 
 **The hero headline has no entrance animation.** It is the LCP element, so it paints
 immediately at full opacity. Everything kinetic above the fold is secondary chrome. No
