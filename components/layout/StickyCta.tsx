@@ -65,6 +65,7 @@ export function StickyCta() {
             <ArrowRight aria-hidden="true" className="size-4" />
           </Link>
 
+          {/* No public number yet — restore once contact.phone is real.
           <a
             href={contact.phoneHref}
             aria-label={`Call Torque Ship on ${contact.phone}`}
@@ -72,6 +73,7 @@ export function StickyCta() {
           >
             <Phone aria-hidden="true" className="size-5" />
           </a>
+          */}
         </div>
       </div>
     </>

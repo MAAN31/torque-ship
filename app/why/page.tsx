@@ -88,6 +88,7 @@ export default function WhyPage() {
                 <Mail aria-hidden="true" className="size-4 shrink-0" />
                 {contact.email}
               </a>
+              {/* No public number yet — restore once contact.phone is real.
               <a
                 href={contact.phoneHref}
                 className="group inline-flex items-center gap-3 font-mono text-[13px] text-mist transition-colors hover:text-signal"
@@ -95,9 +96,9 @@ export default function WhyPage() {
                 <Phone aria-hidden="true" className="size-4 shrink-0" />
                 {contact.phone}
               </a>
+              */}
               <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.16em] text-steel-hi">
                 {contact.responseWindow}
-                <span className="ml-2 text-signal/70">◆ placeholder contact details</span>
               </p>
             </div>
           </div>

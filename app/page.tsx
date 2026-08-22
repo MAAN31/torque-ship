@@ -25,6 +25,7 @@ export default function HomePage() {
           kicker={home.route.kicker}
           title={home.route.title}
           body={home.route.body}
+          tag={home.route.modeTag}
         />
 
         <div className="mt-14 sm:mt-20">

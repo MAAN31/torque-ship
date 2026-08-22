@@ -8,6 +8,7 @@ import { Stamp } from "@/components/system/Stamp";
 import { Field, FieldRow } from "@/components/system/Field";
 import { Container } from "@/components/system/Section";
 import { EASE } from "@/lib/motion";
+import { currentQuarter } from "@/lib/quarter";
 
 /**
  * ABOVE THE FOLD. Answers three questions before a founder can scroll past:
@@ -24,6 +25,10 @@ import { EASE } from "@/lib/motion";
  */
 export function Hero() {
   const reduced = useReducedMotion();
+  // Computed on the visitor's clock, not baked in at build time — this is a
+  // fully static export with no scheduled rebuild, so a hardcoded quarter
+  // would silently go stale between deploys.
+  const bookingStatus = `ACCEPTING Q${currentQuarter()} BOOKINGS`;
 
   const rise = (delay: number) =>
     reduced
@@ -55,7 +60,7 @@ export function Hero() {
             {site.docType}
           </span>
           <Stamp tone="signal" rotate={-3} live>
-            {home.hero.status}
+            {bookingStatus}
           </Stamp>
         </motion.div>
 
@@ -74,9 +79,10 @@ export function Hero() {
 
         <motion.p
           {...rise(0.1)}
-          className="mt-7 max-w-[54ch] text-[16px] leading-relaxed text-mist sm:text-[19px]"
+          className="mt-7 max-w-[54ch] text-[16px] leading-relaxed sm:text-[19px]"
         >
-          {home.hero.subhead}
+          <span className="font-medium text-paper">{home.hero.subhead.lead}</span>{" "}
+          <span className="text-mist">{home.hero.subhead.rest}</span>
         </motion.p>
 
         <motion.div {...rise(0.18)} className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">

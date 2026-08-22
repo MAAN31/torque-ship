@@ -30,12 +30,15 @@ export const site = {
   url: "https://torqueship.com", // PLACEHOLDER — swap for the real domain
 };
 
-/** Contact endpoints. All PLACEHOLDER — swap before launch. */
+/**
+ * Contact endpoints. Phone is real but not yet public — its UI is commented
+ * out (not deleted) at each call site until there is a number to show.
+ */
 export const contact = {
-  email: "hello@torqueship.com", // PLACEHOLDER
-  phone: "+1 (555) 012-8840", // PLACEHOLDER
-  phoneHref: "tel:+15550128840", // PLACEHOLDER
-  calendly: "https://cal.com/torqueship/intro", // PLACEHOLDER
+  email: "Info@torqueship.com",
+  phone: "+1 (555) 012-8840", // PLACEHOLDER — UI hidden until this is real
+  phoneHref: "tel:+15550128840", // PLACEHOLDER — UI hidden until this is real
+  calendly: "https://calendar.app.google/H1tfdN1s3jbNDYLM8",
   responseWindow: "Same business day, usually under 2 hours.",
 };
 
@@ -58,13 +61,17 @@ export const home = {
   hero: {
     /** Answers "what is this" in one line. Keep it short — it is set huge. */
     headline: ["Your freight,", "handled by the", "person who", "answers."],
-    /** Answers "who is it for" + "why care". */
-    subhead:
-      "I move DTC inventory from Asian factories to US warehouses. One operator, one phone number, landed cost on the table before you wire a deposit.",
+    /**
+     * Answers "who is it for" + "why care". Split so the lead clause — the
+     * actual "what is this" claim — can be styled heavier than the rest.
+     */
+    subhead: {
+      lead: "I move DTC inventory from Asian factories to US warehouses.",
+      rest: "One operator, direct messages, landed cost on the table before you wire a deposit.",
+    },
     /** Answers "who is it for" explicitly, as a manifest field. */
     consignee: "DTC & e-commerce brands importing from Asia",
     lane: "CN · VN · IN → US",
-    status: "ACCEPTING Q3 BOOKINGS", // PLACEHOLDER — keep current or delete
     secondaryCta: { label: "See what I actually do", href: "/services" },
   },
 
@@ -94,6 +101,8 @@ export const home = {
   route: {
     box: "04",
     kicker: "ROUTE OF CARRIAGE",
+    /** The 5-stop timeline below is the ocean route; this flags air is also handled. */
+    modeTag: "SEA · AIR",
     title: "Factory floor to your 3PL door.",
     body: "Five handoffs. Every one of them is where a big forwarder loses your container in a queue. I own all five.",
     stops: [

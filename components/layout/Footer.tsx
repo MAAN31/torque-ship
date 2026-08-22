@@ -53,6 +53,7 @@ export function Footer() {
                     {contact.email}
                   </a>
                 </li>
+                {/* No public number yet — restore once contact.phone is real.
                 <li>
                   <a
                     href={contact.phoneHref}
@@ -61,6 +62,7 @@ export function Footer() {
                     {contact.phone}
                   </a>
                 </li>
+                */}
               </ul>
             </div>
           </div>

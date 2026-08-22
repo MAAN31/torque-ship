@@ -99,10 +99,6 @@ export default function ServicesPage() {
               Or price it yourself first
             </Button>
           </div>
-
-          <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.16em] text-signal/70">
-            ◆ Calendar link is a placeholder — see `contact.calendly` in lib/content.ts
-          </p>
         </Container>
       </Section>
     </>

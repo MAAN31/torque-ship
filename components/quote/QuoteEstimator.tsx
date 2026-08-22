@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowLeft, ArrowRight, Calendar, Check, TriangleAlert } from "lucide-react";
+import { ArrowLeft, ArrowRight, Calendar, Check, Info, TriangleAlert } from "lucide-react";
 import {
   CARGOS,
   ORIGINS,
@@ -389,8 +389,19 @@ function Result({
         })}
       </div>
 
+      {/* Always visible — these rates are illustrative, and the number below
+          must never be mistaken for a confirmed quote. */}
+      <div className="mt-7 flex gap-2.5 border-l-2 border-signal bg-signal-wash p-3">
+        <Info aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-signal" />
+        <p className="text-[12px] leading-relaxed text-mist">
+          <span className="font-semibold text-paper">Illustrative estimate, not a quote.</span>{" "}
+          Built from plausible 2026 lane bands, not today&apos;s desk rates. Confirm the real
+          number with me before you book.
+        </p>
+      </div>
+
       {/* The number. aria-live so a screen reader hears the recalculation. */}
-      <div aria-live="polite" className="mt-7">
+      <div aria-live="polite" className="mt-5">
         <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-faint">
           Estimated freight, clearance & delivery
         </p>
