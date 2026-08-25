@@ -97,7 +97,7 @@ is on screen so it never covers the tool's own controls.
 ## Accessibility
 
 Skip link; semantic landmarks; `aria-current` on nav and the estimator's step index;
-`aria-live` on the estimate so recalculation is announced; native radios for the quote flow;
+`aria-live` on the submission result so success/failure is announced; native radios for the quote flow;
 one global `:focus-visible` treatment that is never removed; 44px+ touch targets throughout;
 `sr-only` truths behind every animated number.
 
@@ -107,5 +107,13 @@ large-text weight.
 
 ## Not built
 
-Analytics, a form backend (the estimator's CTA opens a prefilled `mailto:` — swap for a
-real endpoint if you want submissions captured), sitemap/robots, and an OG image.
+Analytics, sitemap/robots, and an OG image.
+
+## Form submission
+
+The rate-request tool (`components/quote/QuoteEstimator.tsx`) submits directly to
+[Web3Forms](https://web3forms.com) via a JSON POST — no page reload, no mailto handoff.
+The access key in `lib/content.ts` (`web3formsKey`) is a public routing key by Web3Forms'
+own design, not a secret; submissions are restricted by the allowed-domains setting on the
+key itself (configured on web3forms.com), not by hiding this value. On failure, the form
+falls back to a `mailto:` link so a visitor is never stuck.

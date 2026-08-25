@@ -42,6 +42,14 @@ export const contact = {
   responseWindow: "Same business day, usually under 2 hours.",
 };
 
+/**
+ * Web3Forms access key for the rate-request submission (components/quote/QuoteEstimator.tsx).
+ * This is a public routing key, not a secret — Web3Forms' model expects it to
+ * ship in client-side code, and delivery is restricted by the allowed-domains
+ * setting on the key itself, not by hiding this value.
+ */
+export const web3formsKey = "d444bedd-1bdb-4250-b893-1e9ba9601258";
+
 /* -------------------------------------------------------------------- nav */
 
 export const nav = [

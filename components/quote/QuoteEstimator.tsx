@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowLeft, ArrowRight, Calendar, Check } from "lucide-react";
+import { AlertCircle, ArrowLeft, ArrowRight, Calendar, Check, Loader2 } from "lucide-react";
 import {
   CARGOS,
   ORIGINS,
@@ -15,7 +15,7 @@ import {
   type UrgencyId,
   type VolumeId,
 } from "@/lib/estimator";
-import { contact } from "@/lib/content";
+import { contact, web3formsKey } from "@/lib/content";
 import { Button } from "@/components/system/Button";
 import { Stamp } from "@/components/system/Stamp";
 import { cn } from "@/lib/cn";
@@ -79,12 +79,17 @@ const RESULT = STEPS.length;
  *
  * This replaces the contact form entirely. Deliberate decisions:
  *
- * - No email gate. Four quick questions, then a direct line to me — no
- *   generic "tell us about your project" form.
+ * - The email ask comes last, not first. All four questions are answered and
+ *   the summary is visible before an email is ever requested — it's needed to
+ *   send the request, not to unlock the answer, which is the distinction that
+ *   keeps this from being the usual "give us your email to see the number"
+ *   pattern this tool otherwise avoids.
  * - No computed number. An earlier version priced the shipment from
  *   placeholder rate tables; the figures didn't track real desk rates
  *   closely enough to show with a straight face, so this hands the four
  *   answers to a person instead of a formula. See lib/estimator.ts.
+ * - Submits directly (Web3Forms), no mailto handoff. A visitor without a
+ *   configured email client would otherwise hit a dead click.
  * - Selecting an option advances the step. No "Next" button, because a Next
  *   button on a single-select question is a guaranteed extra tap, four times.
  * - Native radio inputs under the hood, visually hidden. Arrow-key navigation,
@@ -315,6 +320,8 @@ function QuestionStep({
 
 /* ------------------------------------------------------------------ result */
 
+type SubmitStatus = "idle" | "sending" | "sent" | "error";
+
 function Result({
   answers,
   onEdit,
@@ -331,7 +338,11 @@ function Result({
     urgency: answers.urgency!,
   });
 
-  const mailto = `mailto:${contact.email}?subject=${encodeURIComponent(
+  const [email, setEmail] = useState("");
+  const [botcheck, setBotcheck] = useState(false);
+  const [status, setStatus] = useState<SubmitStatus>("idle");
+
+  const mailtoFallback = `mailto:${contact.email}?subject=${encodeURIComponent(
     `Rate request — ${spec}`
   )}&body=${encodeURIComponent(
     [
@@ -344,8 +355,65 @@ function Result({
     ].join("\n")
   )}`;
 
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setStatus("sending");
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: web3formsKey,
+          subject: `Rate request — ${spec}`,
+          from_name: "Torque Ship rate request",
+          email,
+          shipment: spec,
+          origin: answers.origin,
+          cargo: answers.cargo,
+          volume: answers.volume,
+          urgency: answers.urgency,
+          botcheck,
+        }),
+      });
+      const data = await res.json();
+      setStatus(data.success ? "sent" : "error");
+    } catch {
+      setStatus("error");
+    }
+  }
+
+  if (status === "sent") {
+    return (
+      <div aria-live="polite">
+        <Stamp tone="signal" rotate={-2} live>
+          Request sent
+        </Stamp>
+        <p className="mt-5 font-display text-[clamp(1.5rem,4vw,2.5rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-paper text-balance">
+          Got it. I&apos;ll reply to {email}.
+        </p>
+        <p className="mt-3 max-w-[52ch] text-[14px] leading-relaxed text-mist">
+          {spec}
+        </p>
+        <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.16em] text-signal">
+          {contact.responseWindow}
+        </p>
+        <div className="mt-8">
+          <Button
+            href={contact.calendly}
+            variant="ghost"
+            size="lg"
+            trailing={<Calendar aria-hidden="true" className="size-4" />}
+          >
+            Or book 15 minutes now
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div>
+    <form onSubmit={handleSubmit}>
       {/* Answer chips — every input stays one tap from editable. */}
       <div className="flex flex-wrap gap-2">
         {STEPS.map((s, i) => {
@@ -368,7 +436,7 @@ function Result({
       </div>
 
       {/* No computed number — a person, not a formula, prices this. */}
-      <div aria-live="polite" className="mt-7">
+      <div className="mt-7">
         <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-faint">
           What you&apos;re shipping
         </p>
@@ -381,20 +449,57 @@ function Result({
           I don&apos;t publish a number I haven&apos;t checked against a real rate sheet. Send
           this over and you&apos;ll have an actual quote back from me directly.
         </p>
+      </div>
 
-        <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.16em] text-signal">
+      <div className="mt-6">
+        <label
+          htmlFor="quote-email"
+          className="block font-mono text-[11px] uppercase tracking-[0.2em] text-faint"
+        >
+          Where should I send it?
+        </label>
+        <input
+          id="quote-email"
+          type="email"
+          name="email"
+          required
+          autoComplete="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="you@company.com"
+          className="mt-2 w-full border border-steel bg-graphite px-4 py-3 font-mono text-[14px] text-paper placeholder:text-steel-hi focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-signal"
+        />
+        {/* Honeypot — hidden from sighted and screen-reader users, bots check it anyway. */}
+        <input
+          type="checkbox"
+          name="botcheck"
+          checked={botcheck}
+          onChange={(e) => setBotcheck(e.target.checked)}
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          className="hidden"
+        />
+        <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.16em] text-signal">
           {contact.responseWindow}
         </p>
       </div>
 
       <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
         <Button
-          href={mailto}
+          type="submit"
           size="lg"
           className="w-full sm:w-auto"
-          trailing={<ArrowRight aria-hidden="true" className="size-4" />}
+          disabled={status === "sending"}
+          trailing={
+            status === "sending" ? (
+              <Loader2 aria-hidden="true" className="size-4 animate-spin" />
+            ) : (
+              <ArrowRight aria-hidden="true" className="size-4" />
+            )
+          }
         >
-          Confirm this with me
+          {status === "sending" ? "Sending…" : "Send my rate request"}
         </Button>
 
         <Button
@@ -408,6 +513,20 @@ function Result({
         </Button>
       </div>
 
+      {status === "error" ? (
+        <div role="alert" className="mt-5 flex gap-2.5 border-l-2 border-flag bg-flag/10 p-3">
+          <AlertCircle aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-flag" />
+          <p className="text-[12px] leading-relaxed text-mist">
+            <span className="font-semibold text-paper">That didn&apos;t send.</span>{" "}
+            Try again, or{" "}
+            <a href={mailtoFallback} className="text-signal underline-offset-4 hover:underline">
+              email me directly
+            </a>
+            .
+          </p>
+        </div>
+      ) : null}
+
       <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-steel pt-4">
         <p className="max-w-[52ch] font-mono text-[10px] uppercase leading-relaxed tracking-[0.12em] text-steel-hi">
           No instant number — real rates come from a real rate sheet, not a guess.
@@ -420,7 +539,7 @@ function Result({
           Start over
         </button>
       </div>
-    </div>
+    </form>
   );
 }
 
