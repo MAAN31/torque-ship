@@ -97,19 +97,29 @@ export const home = {
     },
   ],
 
-  /** Scroll-drawn route. Labels are the journey stages. */
+  /** Scroll-drawn route. One timeline, sea and air merged into it. */
   route: {
     box: "04",
     kicker: "ROUTE OF CARRIAGE",
-    /** The 5-stop timeline below is the ocean route; this flags air is also handled. */
-    modeTag: "SEA · AIR",
     title: "Factory floor to your 3PL door.",
     body: "Five handoffs. Every one of them is where a big forwarder loses your container in a queue. I own all five.",
     stops: [
       { code: "ORG", label: "Factory", detail: "Pickup, inspection, cartonisation" },
-      { code: "POL", label: "Port of loading", detail: "Booking, VGM, export clearance" },
-      { code: "SEA", label: "Ocean leg", detail: "Tracked, insured, chased weekly" },
-      { code: "POD", label: "Port of discharge", detail: "ISF, entry, duty, CBP release" },
+      {
+        code: "POL",
+        label: "Port or airport of loading",
+        detail: "Booking, VGM or AWB, export clearance",
+      },
+      {
+        code: "SEA · AIR",
+        label: "Ocean or air leg",
+        detail: "Vessel or flight — tracked and chased weekly",
+      },
+      {
+        code: "POD",
+        label: "Port or airport of discharge",
+        detail: "Entry, duty, CBP release",
+      },
       { code: "DST", label: "Your warehouse", detail: "Drayage, unload, ASN to your 3PL" },
     ],
   },
