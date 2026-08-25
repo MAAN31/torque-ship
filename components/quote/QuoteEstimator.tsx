@@ -386,7 +386,7 @@ function Result({
   if (status === "sent") {
     return (
       <div aria-live="polite">
-        <Stamp tone="signal" rotate={-2} live>
+        <Stamp tone="signal" rotate={-3} live>
           Request sent
         </Stamp>
         <p className="mt-5 font-display text-[clamp(1.5rem,4vw,2.5rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-paper text-balance">
