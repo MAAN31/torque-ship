@@ -54,42 +54,22 @@ export function Container({
 }
 
 /**
- * The section header. Box number + kicker sit on a rule above the title, the
- * way a form field header sits above its input.
+ * The section header — a title with an optional supporting line beneath it.
  */
 export function SectionHead({
-  box,
-  kicker,
   title,
   body,
-  tag,
   className,
   as: Heading = "h2",
 }: {
-  box: string;
-  kicker: string;
   title: string;
   body?: string;
-  /** Small mono badge on the kicker rule — for a mode/scope flag, not decoration. */
-  tag?: string;
   className?: string;
   as?: "h1" | "h2" | "h3";
 }) {
   return (
     <header className={cn("relative", className)}>
-      <div className="flex items-baseline gap-4 border-b border-steel pb-3">
-        <span className="font-mono text-[11px] tracking-[0.2em] text-signal tabular">
-          BOX {box}
-        </span>
-        <span className="font-mono text-[11px] tracking-[0.2em] text-faint">{kicker}</span>
-        {tag ? (
-          <span className="ml-auto border border-steel-hi px-2 py-1 font-mono text-[10px] tracking-[0.14em] text-mist">
-            {tag}
-          </span>
-        ) : null}
-      </div>
-
-      <Heading className="mt-7 max-w-[18ch] font-display text-[clamp(2rem,6vw,4.25rem)] font-extrabold leading-[0.94] tracking-[-0.03em] text-paper text-balance">
+      <Heading className="max-w-[18ch] font-display text-[clamp(2rem,6vw,4.25rem)] font-extrabold leading-[0.94] tracking-[-0.03em] text-paper text-balance">
         {title}
       </Heading>
 

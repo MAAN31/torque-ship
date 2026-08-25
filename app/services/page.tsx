@@ -17,13 +17,7 @@ export default function ServicesPage() {
   return (
     <>
       <Section divided={false} className="py-14 sm:py-20">
-        <SectionHead
-          as="h1"
-          box={services.intro.box}
-          kicker={services.intro.kicker}
-          title={services.intro.title}
-          body={services.intro.subhead}
-        />
+        <SectionHead as="h1" title={services.intro.title} body={services.intro.subhead} />
       </Section>
 
       {/* Scroll-pinned switcher: sticky index left, panels right ----------- */}
@@ -43,12 +37,7 @@ export default function ServicesPage() {
 
       {/* Commercials ------------------------------------------------------- */}
       <Section className="py-16 sm:py-24">
-        <SectionHead
-          box={services.pricing.box}
-          kicker={services.pricing.kicker}
-          title={services.pricing.title}
-          body={services.pricing.body}
-        />
+        <SectionHead title={services.pricing.title} body={services.pricing.body} />
 
         <div className="mt-10">
           <FieldRow cols={4}>

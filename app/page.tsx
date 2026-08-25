@@ -20,12 +20,7 @@ export default function HomePage() {
 
       {/* 04 — route of carriage ------------------------------------------- */}
       <Section className="py-16 sm:py-24">
-        <SectionHead
-          box={home.route.box}
-          kicker={home.route.kicker}
-          title={home.route.title}
-          body={home.route.body}
-        />
+        <SectionHead title={home.route.title} body={home.route.body} />
 
         <div className="mt-14 sm:mt-20">
           <RouteJourney />
@@ -53,12 +48,7 @@ export default function HomePage() {
       {/* 05 — sample shipment record -------------------------------------- */}
       <Section className="py-16 sm:py-24">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-center lg:gap-16">
-          <SectionHead
-            box={home.status.box}
-            kicker={home.status.kicker}
-            title={home.status.title}
-            body={home.status.body}
-          />
+          <SectionHead title={home.status.title} body={home.status.body} />
           <ShipmentStatus />
         </div>
       </Section>

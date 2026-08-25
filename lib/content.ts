@@ -53,9 +53,9 @@ export const web3formsKey = "d444bedd-1bdb-4250-b893-1e9ba9601258";
 /* -------------------------------------------------------------------- nav */
 
 export const nav = [
-  { label: "Home", href: "/", box: "01" },
-  { label: "Services", href: "/services", box: "02" },
-  { label: "Why Me", href: "/why", box: "03" },
+  { label: "Home", href: "/" },
+  { label: "Services", href: "/services" },
+  { label: "Why Me", href: "/why" },
 ];
 
 export const primaryCta = {
@@ -107,8 +107,6 @@ export const home = {
 
   /** Scroll-drawn route. One timeline, sea and air merged into it. */
   route: {
-    box: "04",
-    kicker: "ROUTE OF CARRIAGE",
     title: "Factory floor to your 3PL door.",
     body: "Five handoffs. Every one of them is where a big forwarder loses your container in a queue. I own all five.",
     stops: [
@@ -121,7 +119,7 @@ export const home = {
       {
         code: "SEA · AIR",
         label: "Ocean or air leg",
-        detail: "Vessel or flight — tracked and chased weekly",
+        detail: "Vessel or flight — tracked and chased daily",
       },
       {
         code: "POD",
@@ -134,8 +132,6 @@ export const home = {
 
   /** Mock live widget. Illustrative data — clearly framed as a sample. */
   status: {
-    box: "05",
-    kicker: "SAMPLE SHIPMENT RECORD",
     title: "This is what you see, all the time.",
     body: "Every client gets the same record. No login, no portal, no chasing. It is a message with these fields in it.",
     disclaimer: "Illustrative record. Not live data.",
@@ -152,8 +148,6 @@ export const home = {
 
 export const services = {
   intro: {
-    box: "02",
-    kicker: "SCOPE OF SERVICE",
     title: "What I actually do.",
     subhead:
       "Five things. I do all of them myself, which is why there are five and not thirty.",
@@ -174,7 +168,6 @@ export const services = {
         "Consolidation across multiple suppliers",
         "Cargo insurance placement",
       ],
-      stat: { value: "3", suffix: " lanes", label: "CN · VN · IN" },
     },
     {
       id: "customs-compliance",
@@ -189,7 +182,6 @@ export const services = {
         "FDA, CPSC and FCC touchpoints where they apply",
         "Section 301 and tariff-change monitoring",
       ],
-      stat: { value: "10", suffix: "+2", label: "ISF filed on time, every time" },
     },
     {
       id: "documentation",
@@ -204,7 +196,6 @@ export const services = {
         "Supplier document chasing (so you do not do it)",
         "Full document pack archived per shipment",
       ],
-      stat: { value: "0", suffix: "", label: "Demurrage days from bad docs" }, // PLACEHOLDER metric
     },
     {
       id: "last-mile",
@@ -219,7 +210,6 @@ export const services = {
         "Amazon FBA / AWD routing and prep rules",
         "Overflow storage when receiving is backed up",
       ],
-      stat: { value: "48", suffix: "hr", label: "Typical port-to-3PL turn" }, // PLACEHOLDER metric
     },
     {
       id: "when-things-go-sideways",
@@ -234,13 +224,10 @@ export const services = {
         "Damage and shortage claims",
         "Contingency air-freight splits to protect a launch",
       ],
-      stat: { value: "24", suffix: "hr", label: "Max time to hear from me" },
     },
   ],
 
   pricing: {
-    box: "06",
-    kicker: "COMMERCIALS",
     title: "How I charge.",
     body: "Flat fee per shipment plus pass-through cost at cost. I show you the carrier invoice. There is no margin buried in your freight rate, which is the entire reason people leave their last forwarder.",
     points: [
@@ -257,8 +244,6 @@ export const services = {
 
 export const why = {
   intro: {
-    box: "03",
-    kicker: "PARTY OF RECORD",
     title: "One person. That is the pitch.",
     subhead:
       "Big forwarders sell you a platform and hand you a queue. Here is what you get instead, stated plainly enough that you can hold me to it.",
@@ -299,11 +284,9 @@ export const why = {
   },
 
   estimator: {
-    box: "05",
-    kicker: "RATE REQUEST",
-    title: "Four questions, then a real number.",
+    title: "Tell me what you're shipping.",
     subhead:
-      "No generic contact form — just the specifics I need to get you an accurate rate. No email gate, and you hear back the same business day.",
+      "Fill in what you know — nothing here is required except your email. The more you can give me, the more accurate the number I send back.",
   },
 };
 

@@ -16,13 +16,7 @@ export default function WhyPage() {
   return (
     <>
       <Section divided={false} className="py-14 sm:py-20">
-        <SectionHead
-          as="h1"
-          box={why.intro.box}
-          kicker={why.intro.kicker}
-          title={why.intro.title}
-          body={why.intro.subhead}
-        />
+        <SectionHead as="h1" title={why.intro.title} body={why.intro.subhead} />
       </Section>
 
       {/* Trust points ------------------------------------------------------ */}
@@ -40,8 +34,6 @@ export default function WhyPage() {
         <div className="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-16">
           <div className="lg:sticky lg:top-28 lg:self-start">
             <SectionHead
-              box={why.estimator.box}
-              kicker={why.estimator.kicker}
               title={why.estimator.title}
               body={why.estimator.subhead}
             />

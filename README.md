@@ -31,7 +31,6 @@ app/
   not-found.tsx
 lib/
   content.ts          ← every string on the site
-  estimator.ts        ← the rate-request question catalogue, no maths, no React
   motion.ts           shared variants + the reduced-motion gate
 components/system/    Button · Section · Field · Card · Stamp · StatBlock · Ticker
 components/layout/    Nav · Footer · StickyCta
@@ -41,9 +40,8 @@ components/why/       TrustPoints · TestimonialPlaceholder
 components/quote/     QuoteEstimator
 ```
 
-`Field` is the atom. Value props, service stats and the shipment widget are all
-compositions of one numbered manifest box, which is what keeps the metaphor structural
-rather than applied.
+`Field` is the atom. Value props and the shipment widget are compositions of one numbered
+manifest box, which is what keeps the metaphor structural rather than applied.
 
 ## Swapping the placeholders
 
@@ -58,21 +56,23 @@ so they cannot ship by accident:
 | --- | --- | --- |
 | Phone number | `contact.phone` / `phoneHref` in `lib/content.ts` | UI is commented out (not deleted) in the footer, the Why-page escape hatch and the mobile sticky bar, until there's a real number to show |
 | Testimonial | `why.testimonial` | Renders as an unsigned statement. Set `placeholder: false` and the provisional styling clears itself |
-| Service stat plates | `services.categories[].stat` | Two are invented metrics — verify before publishing |
 
 ## The decisions worth knowing about
 
-**The rate request tool replaces the contact form.** Four questions, no email gate — a
-direct line to me instead of a generic "tell us about your project" form. Selecting an
-option advances the step, so there is no Next button and no four extra taps. Answers stay
-editable from the result screen. It is built on native radio inputs, so arrow-key
-navigation and group semantics are correct rather than reimplemented.
+**The rate request tool replaces the contact form.** One flat form grouped into Shipment
+Basics, Product Details and Shipping Preferences — a direct line to me instead of a generic
+"tell us about your project" form. Nothing is required except email: a visitor who doesn't
+have a cargo value or HTS code on hand yet shouldn't be blocked from reaching out. The
+finite-choice fields (palletized/floor-loaded, air/sea/split, DDU/DDP/FOB) are native radio
+inputs under the hood, so arrow-key navigation and group semantics are correct rather than
+reimplemented.
 
 **It doesn't compute a number.** An earlier version priced the shipment from placeholder
-rate tables in `lib/estimator.ts`; the figures didn't track real desk rates closely enough
-to show with a straight face — some ran wildly high, some wildly low, depending on the
-combination. Rather than keep showing invented numbers, the tool now hands the four
-answers straight to me and I reply with a real rate, same business day.
+rate tables and stepped through four single-select questions; the figures didn't track real
+desk rates closely enough to show with a straight face — some ran wildly high, some wildly
+low, depending on the combination. Rather than keep showing invented numbers, the tool hands
+whatever detail is provided straight to me (via Web3Forms) and I reply with a real rate,
+same business day.
 
 **The hero headline has no entrance animation.** It is the LCP element, so it paints
 immediately at full opacity. Everything kinetic above the fold is secondary chrome. No
@@ -96,8 +96,8 @@ is on screen so it never covers the tool's own controls.
 
 ## Accessibility
 
-Skip link; semantic landmarks; `aria-current` on nav and the estimator's step index;
-`aria-live` on the submission result so success/failure is announced; native radios for the quote flow;
+Skip link; semantic landmarks; `aria-current` on nav;
+`aria-live` on the submission result so success/failure is announced; native radios for the quote flow's choice fields;
 one global `:focus-visible` treatment that is never removed; 44px+ touch targets throughout;
 `sr-only` truths behind every animated number.
 

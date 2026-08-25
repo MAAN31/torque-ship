@@ -1,6 +1,5 @@
 import { services } from "@/lib/content";
 import { GLYPHS } from "./Glyph";
-import { Ticker } from "@/components/system/Ticker";
 
 type Category = (typeof services.categories)[number];
 
@@ -15,7 +14,6 @@ type Category = (typeof services.categories)[number];
  */
 export function ServicePanel({ category, index }: { category: Category; index: number }) {
   const Glyph = GLYPHS[category.id];
-  const statNumber = Number(category.stat.value);
 
   return (
     <article
@@ -62,21 +60,6 @@ export function ServicePanel({ category, index }: { category: Category; index: n
             </li>
           ))}
         </ul>
-      </div>
-
-      {/* Stat plate — the mono/data accent that keeps each module feeling
-          measured rather than described. */}
-      <div className="mt-10 inline-flex items-baseline gap-4 border border-steel px-5 py-4">
-        <span className="font-display text-[2.5rem] font-extrabold leading-none tracking-[-0.04em] text-signal tabular">
-          {Number.isFinite(statNumber) ? (
-            <Ticker value={statNumber} suffix={category.stat.suffix} />
-          ) : (
-            `${category.stat.value}${category.stat.suffix}`
-          )}
-        </span>
-        <span className="max-w-[22ch] font-mono text-[10px] uppercase leading-relaxed tracking-[0.14em] text-mist">
-          {category.stat.label}
-        </span>
       </div>
 
       <span className="sr-only">

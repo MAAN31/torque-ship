@@ -46,7 +46,6 @@ export function Nav() {
                   active ? "text-signal" : "text-mist hover:text-paper"
                 )}
               >
-                <span className="mr-1.5 hidden text-steel-hi sm:inline">{item.box}</span>
                 {item.label}
                 <span
                   aria-hidden="true"
