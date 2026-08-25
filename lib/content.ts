@@ -143,8 +143,8 @@ export const home = {
 
   outro: {
     kicker: "NEXT ACTION",
-    title: "Get a number in 40 seconds.",
-    body: "Four questions, no email gate, no call required. You will see a real landed-cost range before you decide whether to talk to me.",
+    title: "Tell me what you're shipping.",
+    body: "Four questions, no email gate, no call required. I reply with a real rate, same business day.",
   },
 };
 
