@@ -27,7 +27,7 @@ export const site = {
   tagline: "Asia → US freight, run by one person.",
   description:
     "Torque Ship moves DTC and e-commerce inventory from Asian factories to US warehouses. One operator, direct line, landed cost before you commit.",
-  url: "https://torqueship.com", // PLACEHOLDER — swap for the real domain
+  url: "https://torqueship.com",
 };
 
 /**
@@ -293,9 +293,9 @@ export const why = {
   estimator: {
     box: "05",
     kicker: "RATE REQUEST",
-    title: "Landed cost estimator.",
+    title: "Four questions, then a real number.",
     subhead:
-      "Four questions. No email gate. You get a real range and an itemised breakdown, then you decide whether I am worth a phone call.",
+      "No generic contact form — just the specifics I need to get you an accurate rate. No email gate, and you hear back the same business day.",
   },
 };
 

@@ -1,18 +1,15 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowLeft, ArrowRight, Calendar, Check, Info, TriangleAlert } from "lucide-react";
+import { ArrowLeft, ArrowRight, Calendar, Check } from "lucide-react";
 import {
   CARGOS,
   ORIGINS,
   URGENCIES,
   VOLUMES,
   describe,
-  estimate,
-  usd,
   type CargoId,
-  type Estimate,
   type Option,
   type OriginId,
   type UrgencyId,
@@ -20,7 +17,6 @@ import {
 } from "@/lib/estimator";
 import { contact } from "@/lib/content";
 import { Button } from "@/components/system/Button";
-import { Ticker } from "@/components/system/Ticker";
 import { Stamp } from "@/components/system/Stamp";
 import { cn } from "@/lib/cn";
 
@@ -83,16 +79,18 @@ const RESULT = STEPS.length;
  *
  * This replaces the contact form entirely. Deliberate decisions:
  *
- * - No email gate. The founder gets the number first and decides afterwards
- *   whether I'm worth a conversation. Gating the result behind an email is the
- *   single most common way this pattern is ruined.
+ * - No email gate. Four quick questions, then a direct line to me — no
+ *   generic "tell us about your project" form.
+ * - No computed number. An earlier version priced the shipment from
+ *   placeholder rate tables; the figures didn't track real desk rates
+ *   closely enough to show with a straight face, so this hands the four
+ *   answers to a person instead of a formula. See lib/estimator.ts.
  * - Selecting an option advances the step. No "Next" button, because a Next
  *   button on a single-select question is a guaranteed extra tap, four times.
  * - Native radio inputs under the hood, visually hidden. Arrow-key navigation,
  *   group semantics and label association come free and correct; a div-based
  *   custom control would have to reimplement all three and usually gets it wrong.
- * - Answers stay editable from the result screen. Changing one recalculates in
- *   place rather than restarting the flow.
+ * - Answers stay editable from the result screen, same as before.
  * - Fixed min-height on the option area, so stepping never shifts layout.
  */
 export function QuoteEstimator() {
@@ -102,19 +100,6 @@ export function QuoteEstimator() {
 
   const complete =
     !!answers.origin && !!answers.cargo && !!answers.volume && !!answers.urgency;
-
-  const result = useMemo(
-    () =>
-      complete
-        ? estimate({
-            origin: answers.origin!,
-            cargo: answers.cargo!,
-            volume: answers.volume!,
-            urgency: answers.urgency!,
-          })
-        : null,
-    [complete, answers.origin, answers.cargo, answers.volume, answers.urgency]
-  );
 
   function select(key: StepKey, id: string, index: number) {
     // Written out per key rather than `{ ...answers, [key]: id }`. A computed
@@ -158,9 +143,8 @@ export function QuoteEstimator() {
               onSelect={select}
             />
           </motion.div>
-        ) : result ? (
+        ) : complete ? (
           <Result
-            result={result}
             answers={answers}
             onEdit={(i) => setStep(i)}
             onReset={() => {
@@ -193,12 +177,12 @@ function Header({
     <div className="border-b border-steel">
       <div className="flex items-center justify-between gap-4 px-5 py-3.5 sm:px-8">
         <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-faint">
-          {done ? "Estimate" : `Step ${step + 1} of ${STEPS.length}`}
+          {done ? "Request" : `Step ${step + 1} of ${STEPS.length}`}
         </span>
 
         {done ? (
           <Stamp tone="signal" rotate={0} live>
-            Calculated
+            Logged
           </Stamp>
         ) : (
           <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-faint">
@@ -332,12 +316,10 @@ function QuestionStep({
 /* ------------------------------------------------------------------ result */
 
 function Result({
-  result,
   answers,
   onEdit,
   onReset,
 }: {
-  result: Estimate;
   answers: Answers;
   onEdit: (i: number) => void;
   onReset: () => void;
@@ -353,12 +335,9 @@ function Result({
     `Rate request — ${spec}`
   )}&body=${encodeURIComponent(
     [
-      "Hi — I ran the estimator and want to confirm these numbers.",
+      "Hi — I filled out the rate request tool and I'm looking for a real number.",
       "",
-      `Lane:      ${spec}`,
-      `Estimate:  ${usd(result.totalLow)} – ${usd(result.totalHigh)}`,
-      `Transit:   ${result.transitLow}–${result.transitHigh} days, door to door`,
-      `Mode:      ${result.mode}`,
+      `Shipment:  ${spec}`,
       "",
       "Cargo value / target landing date:",
       "",
@@ -388,73 +367,25 @@ function Result({
         })}
       </div>
 
-      {/* Always visible — these rates are illustrative, and the number below
-          must never be mistaken for a confirmed quote. */}
-      <div className="mt-7 flex gap-2.5 border-l-2 border-signal bg-signal-wash p-3">
-        <Info aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-signal" />
-        <p className="text-[12px] leading-relaxed text-mist">
-          <span className="font-semibold text-paper">Illustrative estimate, not a quote.</span>{" "}
-          Built from plausible 2026 lane bands, not today&apos;s desk rates. Confirm the real
-          number with me before you book.
-        </p>
-      </div>
-
-      {/* The number. aria-live so a screen reader hears the recalculation. */}
-      <div aria-live="polite" className="mt-5">
+      {/* No computed number — a person, not a formula, prices this. */}
+      <div aria-live="polite" className="mt-7">
         <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-faint">
-          Estimated freight, clearance & delivery
+          What you&apos;re shipping
         </p>
 
-        <p className="mt-3 font-display text-[clamp(2.25rem,8vw,4.5rem)] font-extrabold leading-[0.95] tracking-[-0.04em] text-signal tabular">
-          <Ticker mode="on-change" value={result.totalLow} prefix="$" duration={800} />
-          <span className="text-steel-hi"> – </span>
-          <Ticker mode="on-change" value={result.totalHigh} prefix="$" duration={800} />
+        <p className="mt-3 font-display text-[clamp(1.5rem,4vw,2.5rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-paper text-balance">
+          {spec}
         </p>
 
-        <p className="mt-3 font-mono text-[13px] text-mist">
-          <Ticker mode="on-change" value={result.transitLow} duration={600} />–
-          <Ticker mode="on-change" value={result.transitHigh} duration={600} /> days door to door
-          <span className="mx-2 text-steel-hi">·</span>
-          <span className="text-paper">{result.mode}</span>
+        <p className="mt-4 max-w-[52ch] text-[14px] leading-relaxed text-mist">
+          I don&apos;t publish a number I haven&apos;t checked against a real rate sheet. Send
+          this over and you&apos;ll have an actual quote back from me directly.
+        </p>
+
+        <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.16em] text-signal">
+          {contact.responseWindow}
         </p>
       </div>
-
-      {/* Itemised, because the whole brand argument is "I show you the invoice". */}
-      <div className="mt-8 border border-steel">
-        <div className="border-b border-steel bg-panel px-4 py-2.5">
-          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-faint">
-            Breakdown
-          </span>
-        </div>
-
-        <ul className="divide-y divide-steel">
-          {result.lines.map((l) => (
-            <li key={l.label} className="flex items-baseline justify-between gap-4 px-4 py-3">
-              <span className="min-w-0">
-                <span className="block text-[14px] text-paper">{l.label}</span>
-                <span className="block font-mono text-[10px] uppercase tracking-[0.12em] text-faint">
-                  {l.note}
-                </span>
-              </span>
-              <span className="shrink-0 font-mono text-[13px] text-mist tabular">
-                {usd(l.low)}–{usd(l.high)}
-              </span>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {/* The blunt-advice moment. This is the brand, not a warning banner. */}
-      {result.flags.length > 0 ? (
-        <ul className="mt-6 space-y-3">
-          {result.flags.map((f) => (
-            <li key={f} className="flex gap-3 border-l-2 border-signal bg-signal-wash p-3.5">
-              <TriangleAlert aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-signal" />
-              <p className="text-[13px] leading-relaxed text-paper">{f}</p>
-            </li>
-          ))}
-        </ul>
-      ) : null}
 
       <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
         <Button
@@ -479,8 +410,7 @@ function Result({
 
       <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-steel pt-4">
         <p className="max-w-[52ch] font-mono text-[10px] uppercase leading-relaxed tracking-[0.12em] text-steel-hi">
-          Illustrative range from live-market averages. Not a quote until I confirm it in writing
-          against your commercial invoice.
+          No instant number — real rates come from a real rate sheet, not a guess.
         </p>
         <button
           type="button"
@@ -490,10 +420,6 @@ function Result({
           Start over
         </button>
       </div>
-
-      <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.14em] text-signal/70">
-        ◆ Placeholder rate table — see lib/estimator.ts
-      </p>
     </div>
   );
 }

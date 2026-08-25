@@ -27,11 +27,11 @@ app/
   layout.tsx          fonts, metadata, skip link, Nav / Footer / StickyCta
   page.tsx            HOME     — hero · 3 value props · route · record · CTA
   services/page.tsx   SERVICES — 5 category modules · commercials · CTA
-  why/page.tsx        WHY ME   — trust points · figures · testimonial · estimator
+  why/page.tsx        WHY ME   — trust points · testimonial · rate request
   not-found.tsx
 lib/
   content.ts          ← every string on the site
-  estimator.ts        ← landed-cost maths, no React
+  estimator.ts        ← the rate-request question catalogue, no maths, no React
   motion.ts           shared variants + the reduced-motion gate
 components/system/    Button · Section · Field · Card · Stamp · StatBlock · Ticker
 components/layout/    Nav · Footer · StickyCta
@@ -41,9 +41,9 @@ components/why/       TrustPoints · TestimonialPlaceholder
 components/quote/     QuoteEstimator
 ```
 
-`Field` is the atom. Value props, service stats, the shipment widget and the estimator
-breakdown are all compositions of one numbered manifest box, which is what keeps the
-metaphor structural rather than applied.
+`Field` is the atom. Value props, service stats and the shipment widget are all
+compositions of one numbered manifest box, which is what keeps the metaphor structural
+rather than applied.
 
 ## Swapping the placeholders
 
@@ -56,27 +56,23 @@ so they cannot ship by accident:
 
 | What | Where | Note |
 | --- | --- | --- |
-| Email, phone, calendar link | `contact` in `lib/content.ts` | Rendered with a ◆ placeholder note on the Why page |
+| Phone number | `contact.phone` / `phoneHref` in `lib/content.ts` | UI is commented out (not deleted) in the footer, the Why-page escape hatch and the mobile sticky bar, until there's a real number to show |
 | Testimonial | `why.testimonial` | Renders as an unsigned statement. Set `placeholder: false` and the provisional styling clears itself |
-| The four figures | `why.stats` | Each renders as `—` with a Placeholder tag until `placeholder: false` |
 | Service stat plates | `services.categories[].stat` | Two are invented metrics — verify before publishing |
-| Rate tables | `lib/estimator.ts` | Plausible 2026 Asia→US bands, not desk rates. The result screen says so |
-| Domain | `site.url` | Used for `metadataBase` and OG tags |
 
 ## The decisions worth knowing about
 
-**The estimator replaces the contact form.** Four questions, no email gate — the founder
-gets the number first and decides afterwards whether you are worth a call. Gating the
-result behind an email is the usual way this pattern gets ruined. Selecting an option
-advances the step, so there is no Next button and no four extra taps. Answers stay editable
-from the result screen and recalculate in place. It is built on native radio inputs, so
-arrow-key navigation and group semantics are correct rather than reimplemented.
+**The rate request tool replaces the contact form.** Four questions, no email gate — a
+direct line to me instead of a generic "tell us about your project" form. Selecting an
+option advances the step, so there is no Next button and no four extra taps. Answers stay
+editable from the result screen. It is built on native radio inputs, so arrow-key
+navigation and group semantics are correct rather than reimplemented.
 
-**The estimator quotes DDU, not duty-paid.** The number is FREIGHT + CLEARANCE + DELIVERY
-only — delivered, duty unpaid. Duty and tariffs need a declared commercial value the
-brief's four-question input set doesn't collect, and inventing a cargo value to fold a
-confident-looking duty figure into the total would be the exact opacity this brand exists
-to argue against, so the tool doesn't quote duty at all.
+**It doesn't compute a number.** An earlier version priced the shipment from placeholder
+rate tables in `lib/estimator.ts`; the figures didn't track real desk rates closely enough
+to show with a straight face — some ran wildly high, some wildly low, depending on the
+combination. Rather than keep showing invented numbers, the tool now hands the four
+answers straight to me and I reply with a real rate, same business day.
 
 **The hero headline has no entrance animation.** It is the LCP element, so it paints
 immediately at full opacity. Everything kinetic above the fold is secondary chrome. No
