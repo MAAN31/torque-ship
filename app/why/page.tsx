@@ -1,20 +1,40 @@
 import type { Metadata } from "next";
 import { Mail, Phone } from "lucide-react";
-import { contact, why } from "@/lib/content";
+import { contact, site, why } from "@/lib/content";
+import { faqSchema } from "@/lib/schema";
 import { Section, SectionHead } from "@/components/system/Section";
+import { JsonLd } from "@/components/system/JsonLd";
 import { TrustPoints } from "@/components/why/TrustPoints";
 import { TestimonialPlaceholder } from "@/components/why/TestimonialPlaceholder";
+import { Faq } from "@/components/why/Faq";
 import { QuoteEstimator } from "@/components/quote/QuoteEstimator";
+
+const description =
+  "One operator, direct line, landed cost before you commit. Price your lane with the estimator, then decide whether to call.";
 
 export const metadata: Metadata = {
   title: "Why Me",
-  description:
-    "One operator, direct line, landed cost before you commit. Price your lane with the estimator, then decide whether to call.",
+  description,
+  openGraph: {
+    title: `Why Me — ${site.name}`,
+    description,
+    url: `${site.url}/why`,
+    siteName: site.name,
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: `Why Me — ${site.name}`,
+    description,
+  },
+  alternates: { canonical: `${site.url}/why` },
 };
 
 export default function WhyPage() {
   return (
     <>
+      <JsonLd data={faqSchema(why.faq.items)} />
+
       <Section divided={false} className="py-14 sm:py-20">
         <SectionHead as="h1" title={why.intro.title} body={why.intro.subhead} />
       </Section>
@@ -24,9 +44,20 @@ export default function WhyPage() {
         <TrustPoints />
       </Section>
 
-      {/* Testimonial slot -------------------------------------------------- */}
+      {/* Testimonial slot — hidden entirely until a real one exists, rather
+          than shipping dev-facing placeholder text on the live site. */}
+      {why.testimonial.placeholder ? null : (
+        <Section className="py-14 sm:py-20">
+          <TestimonialPlaceholder />
+        </Section>
+      )}
+
+      {/* FAQ ----------------------------------------------------------------- */}
       <Section className="py-14 sm:py-20">
-        <TestimonialPlaceholder />
+        <SectionHead title={why.faq.title} />
+        <div className="mt-10">
+          <Faq />
+        </div>
       </Section>
 
       {/* Closing conversion moment — exactly one action --------------------- */}

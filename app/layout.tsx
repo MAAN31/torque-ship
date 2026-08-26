@@ -3,7 +3,9 @@ import { Archivo, JetBrains_Mono } from "next/font/google";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { StickyCta } from "@/components/layout/StickyCta";
+import { JsonLd } from "@/components/system/JsonLd";
 import { site } from "@/lib/content";
+import { organizationSchema } from "@/lib/schema";
 import "./globals.css";
 
 /**
@@ -40,6 +42,12 @@ export const metadata: Metadata = {
     siteName: site.name,
     type: "website",
   },
+  twitter: {
+    card: "summary",
+    title: `${site.name} — ${site.tagline}`,
+    description: site.description,
+  },
+  alternates: { canonical: site.url },
   robots: { index: true, follow: true },
 };
 
@@ -52,6 +60,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${archivo.variable} ${jetbrains.variable}`}>
       <body className="min-h-dvh antialiased">
+        <JsonLd data={organizationSchema} />
+
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:bg-signal focus:px-4 focus:py-2 focus:font-mono focus:text-[12px] focus:uppercase focus:tracking-[0.14em] focus:text-ink"

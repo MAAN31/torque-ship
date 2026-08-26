@@ -148,7 +148,7 @@ export const home = {
 
 export const services = {
   intro: {
-    title: "What I actually do.",
+    title: "Freight forwarding services, done by one person.",
     subhead:
       "Five things. I do all of them myself, which is why there are five and not thirty.",
   },
@@ -244,7 +244,7 @@ export const services = {
 
 export const why = {
   intro: {
-    title: "One person. That is the pitch.",
+    title: "One-person freight forwarding. That is the pitch.",
     subhead:
       "Big forwarders sell you a platform and hand you a queue. Here is what you get instead, stated plainly enough that you can hold me to it.",
   },
@@ -287,6 +287,32 @@ export const why = {
     title: "Tell me what you're shipping.",
     subhead:
       "Fill in what you know — nothing here is required except your email. The more you can give me, the more accurate the number I send back.",
+  },
+
+  faq: {
+    title: "Questions people actually ask.",
+    items: [
+      {
+        question: "What's the difference between FOB, DDP, and DDU?",
+        answer:
+          "FOB (Free On Board) means your responsibility starts once cargo is loaded at the origin port — you own freight, insurance, and destination costs from there. DDP (Delivered Duty Paid) means the forwarder handles everything, duty included, all the way to your door. DDU (Delivered Duty Unpaid, often called DAP today) means delivery is handled end to end, but you pay duty and taxes separately at destination.",
+      },
+      {
+        question: "How long does ocean freight from Asia to the US typically take?",
+        answer:
+          "Roughly 3–6 weeks port to port, depending on the origin port, destination coast, and season. Add a few more days on each end for origin pickup and destination drayage.",
+      },
+      {
+        question: "Is there a minimum shipment size?",
+        answer:
+          "No minimum. I'll move a few pallets by LCL or a full container by FCL — whatever fits your order.",
+      },
+      {
+        question: "What does \"flat fee plus pass-through\" mean?",
+        answer:
+          "You pay one flat fee for my work. The actual freight, duty, and carrier costs pass through to you at cost, and I show you the carrier invoice — there's no margin hidden inside the freight rate.",
+      },
+    ],
   },
 };
 

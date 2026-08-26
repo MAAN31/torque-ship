@@ -1,16 +1,31 @@
 import type { Metadata } from "next";
 import { ArrowRight, Calendar } from "lucide-react";
-import { services } from "@/lib/content";
+import { services, site } from "@/lib/content";
 import { Section, SectionHead, Container } from "@/components/system/Section";
 import { ServiceIndex } from "@/components/services/ServiceIndex";
 import { ServicePanel } from "@/components/services/ServicePanel";
 import { Button } from "@/components/system/Button";
 import { Field, FieldRow } from "@/components/system/Field";
 
+const description =
+  "Sourcing & freight, customs & compliance, documentation, last-mile, and what happens when things go sideways.";
+
 export const metadata: Metadata = {
   title: "Services",
-  description:
-    "Sourcing & freight, customs & compliance, documentation, last-mile, and what happens when things go sideways.",
+  description,
+  openGraph: {
+    title: `Services — ${site.name}`,
+    description,
+    url: `${site.url}/services`,
+    siteName: site.name,
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: `Services — ${site.name}`,
+    description,
+  },
+  alternates: { canonical: `${site.url}/services` },
 };
 
 export default function ServicesPage() {

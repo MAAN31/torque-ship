@@ -1,16 +1,20 @@
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { home, primaryCta, services } from "@/lib/content";
+import { howToSchema } from "@/lib/schema";
 import { Hero } from "@/components/home/Hero";
 import { ValueProps } from "@/components/home/ValueProps";
 import { RouteJourney } from "@/components/home/RouteJourney";
 import { ShipmentStatus } from "@/components/home/ShipmentStatus";
 import { Section, SectionHead, Container } from "@/components/system/Section";
 import { Button } from "@/components/system/Button";
+import { JsonLd } from "@/components/system/JsonLd";
 
 export default function HomePage() {
   return (
     <>
+      <JsonLd data={howToSchema(home.route.stops)} />
+
       <Hero />
 
       {/* 01 — three value props, full bleed strip -------------------------- */}
