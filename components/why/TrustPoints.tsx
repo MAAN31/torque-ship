@@ -1,8 +1,4 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { why } from "@/lib/content";
-import { fieldIn, useRevealGroup } from "@/lib/motion";
 
 /**
  * Trust points as ruled ledger rows that populate in sequence — a claim, then
@@ -10,19 +6,26 @@ import { fieldIn, useRevealGroup } from "@/lib/motion";
  * nothing hidden behind an interaction.
  */
 export function TrustPoints() {
-  const group = useRevealGroup(0.08);
-
   return (
-    <motion.ol {...group} className="grid grid-cols-1 gap-px bg-steel sm:grid-cols-2">
-      {why.trustPoints.map((p) => (
-        <motion.li
+    <ol className="grid grid-cols-1 gap-px bg-steel sm:grid-cols-2">
+      {why.trustPoints.map((p, i) => (
+        <li
           key={p.box}
-          variants={fieldIn}
-          className="group relative bg-graphite p-6 transition-colors hover:bg-panel sm:p-8"
+          className={[
+            "group relative bg-graphite p-6 transition-colors hover:bg-panel sm:p-8 animate-fade-in-up",
+            // If this is the last item AND there's an odd total, span both columns
+            // so it fills the row rather than leaving an empty grey sibling cell.
+            i === why.trustPoints.length - 1 && why.trustPoints.length % 2 !== 0
+              ? "sm:col-span-2"
+              : "",
+          ]
+            .filter(Boolean)
+            .join(" ")}
+          style={{ animationDelay: `${i * 80}ms` }}
         >
           <span
             aria-hidden="true"
-            className="absolute right-5 top-5 font-display text-[3.5rem] font-extrabold leading-none tracking-[-0.05em] text-steel/70 tabular transition-colors duration-300 group-hover:text-steel-hi/60"
+            className="absolute right-5 top-5 font-display text-[3.5rem] font-extrabold leading-none tracking-[-0.05em] tabular text-steel/70 transition-colors duration-300 group-hover:text-signal/80"
           >
             {p.box}
           </span>
@@ -34,8 +37,8 @@ export function TrustPoints() {
           <p className="relative mt-4 max-w-[42ch] text-[15px] leading-relaxed text-mist">
             {p.body}
           </p>
-        </motion.li>
+        </li>
       ))}
-    </motion.ol>
+    </ol>
   );
 }

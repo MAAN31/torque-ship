@@ -1,24 +1,23 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { home } from "@/lib/content";
 import { Card } from "@/components/system/Card";
-import { fieldIn, useRevealGroup } from "@/lib/motion";
 
 /**
- * The three value props, as a strip of manifest boxes that populate in sequence.
- *
- * Structure is fixed at three and each one is title + one sentence. A founder
- * scanning on a phone gets the whole proposition in three eye-stops. Nothing
- * here expands, collapses, or hides copy behind an interaction.
+ * The three value props, as a strip of manifest boxes.
+ * Uses CSS animations for entrance effects - no client-side JavaScript needed.
  */
 export function ValueProps() {
-  const group = useRevealGroup(0.09);
-
   return (
-    <motion.ul {...group} className="grid grid-cols-1 gap-px bg-steel md:grid-cols-3">
-      {home.valueProps.map((v) => (
-        <motion.li key={v.box} variants={fieldIn} className="bg-ink">
+    <ul className="grid grid-cols-1 gap-px bg-steel md:grid-cols-3">
+      {home.valueProps.map((v, i) => (
+        <li 
+          key={v.box} 
+          className="bg-ink animate-fade-in-up"
+          style={{ 
+            opacity: 0,
+            animationDelay: `${i * 90}ms`,
+            animationFillMode: 'forwards'
+          }}
+        >
           <Card interactive bordered={false} className="h-full p-6 sm:p-8">
             <div className="flex items-baseline gap-3">
               <span className="font-mono text-[11px] tracking-[0.2em] text-signal tabular">
@@ -35,8 +34,8 @@ export function ValueProps() {
 
             <p className="mt-4 text-[15px] leading-relaxed text-mist">{v.body}</p>
           </Card>
-        </motion.li>
+        </li>
       ))}
-    </motion.ul>
+    </ul>
   );
 }

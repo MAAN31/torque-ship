@@ -1,36 +1,43 @@
 import type { Metadata } from "next";
-import { ArrowRight, Calendar } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { services, site } from "@/lib/content";
+import { serviceSchema } from "@/lib/schema";
 import { Section, SectionHead, Container } from "@/components/system/Section";
+import { JsonLd } from "@/components/system/JsonLd";
 import { ServiceIndex } from "@/components/services/ServiceIndex";
 import { ServicePanel } from "@/components/services/ServicePanel";
 import { Button } from "@/components/system/Button";
 import { Field, FieldRow } from "@/components/system/Field";
 
 const description =
-  "Sourcing & freight, customs & compliance, documentation, last-mile, and what happens when things go sideways.";
+  "Explore TorqueShip freight forwarding and logistics services for DTC and e-commerce brands, from international transportation to shipment coordination.";
 
 export const metadata: Metadata = {
-  title: "Services",
+  title: {
+    absolute: "Freight Forwarding Services for DTC & E-commerce Brands | TorqueShip",
+  },
   description,
   openGraph: {
-    title: `Services — ${site.name}`,
+    title: "Freight Forwarding Services for DTC & E-commerce Brands | TorqueShip",
     description,
-    url: `${site.url}/services`,
+    url: `${site.url}/services/`,
     siteName: site.name,
     type: "website",
   },
   twitter: {
     card: "summary",
-    title: `Services — ${site.name}`,
+    title: "Freight Forwarding Services for DTC & E-commerce Brands | TorqueShip",
     description,
   },
-  alternates: { canonical: `${site.url}/services` },
+  alternates: { canonical: `${site.url}/services/` },
+  robots: { index: true, follow: true },
 };
 
 export default function ServicesPage() {
   return (
     <>
+      <JsonLd data={serviceSchema()} />
+      
       <Section divided={false} className="py-14 sm:py-20">
         <SectionHead as="h1" title={services.intro.title} body={services.intro.subhead} />
       </Section>
@@ -74,33 +81,23 @@ export default function ServicesPage() {
             Next action
           </span>
 
-          <h2 className="mt-5 max-w-[15ch] font-display text-[clamp(2.25rem,7.5vw,5rem)] font-extrabold leading-[0.92] tracking-[-0.04em] text-paper text-balance">
-            Fifteen minutes, no pitch deck.
+          <h2 className="mt-5 max-w-[16ch] font-display text-[clamp(2.25rem,7.5vw,5rem)] font-extrabold leading-[0.92] tracking-[-0.04em] text-paper text-balance">
+            Need help choosing the right freight option?
           </h2>
 
           <p className="mt-6 max-w-[50ch] text-[16px] leading-relaxed text-mist sm:text-[18px]">
-            Bring a lane and a launch date. You will leave knowing whether the freight math
-            works, whether or not you book anything.
+            Tell us about your shipment and we'll help you determine the right freight solution 
+            for your timeline and budget.
           </p>
 
-          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <div className="mt-10">
             <Button
               href={services.pricing.cta.href}
               size="lg"
               className="w-full sm:w-auto"
-              trailing={<Calendar aria-hidden="true" className="size-4" />}
-            >
-              {services.pricing.cta.label}
-            </Button>
-
-            <Button
-              href="/why#estimator"
-              variant="ghost"
-              size="lg"
-              className="w-full sm:w-auto"
               trailing={<ArrowRight aria-hidden="true" className="size-4" />}
             >
-              Or price it yourself first
+              {services.pricing.cta.label}
             </Button>
           </div>
         </Container>

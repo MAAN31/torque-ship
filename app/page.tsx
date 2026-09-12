@@ -1,14 +1,41 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import { home, primaryCta, services } from "@/lib/content";
+import { home, primaryCta, site } from "@/lib/content";
 import { howToSchema } from "@/lib/schema";
 import { Hero } from "@/components/home/Hero";
 import { ValueProps } from "@/components/home/ValueProps";
+import { Services } from "@/components/home/Services";
 import { RouteJourney } from "@/components/home/RouteJourney";
+import { WhoItsFor } from "@/components/home/WhoItsFor";
 import { ShipmentStatus } from "@/components/home/ShipmentStatus";
 import { Section, SectionHead, Container } from "@/components/system/Section";
 import { Button } from "@/components/system/Button";
 import { JsonLd } from "@/components/system/JsonLd";
+
+const pageDescription =
+  "TorqueShip provides global freight forwarding and logistics for DTC and e-commerce brands, with direct communication from origin to destination.";
+
+export const metadata: Metadata = {
+  title: {
+    absolute: "TorqueShip | Global Freight Forwarding for DTC & E-commerce Brands",
+  },
+  description: pageDescription,
+  openGraph: {
+    title: "TorqueShip | Global Freight Forwarding for DTC & E-commerce Brands",
+    description: pageDescription,
+    url: `${site.url}/`,
+    siteName: site.name,
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "TorqueShip | Global Freight Forwarding for DTC & E-commerce Brands",
+    description: pageDescription,
+  },
+  alternates: { canonical: `${site.url}/` },
+  robots: { index: true, follow: true },
+};
 
 export default function HomePage() {
   return (
@@ -22,8 +49,17 @@ export default function HomePage() {
         <ValueProps />
       </Section>
 
-      {/* 04 — route of carriage ------------------------------------------- */}
+      {/* 02 — services overview ------------------------------------------- */}
       <Section className="py-16 sm:py-24">
+        <SectionHead title={home.services.title} body={home.services.body} />
+        
+        <div className="mt-12 sm:mt-16">
+          <Services />
+        </div>
+      </Section>
+
+      {/* 03 — route of carriage ------------------------------------------- */}
+      <Section id="how-it-works" className="scroll-mt-20 py-16 sm:py-24">
         <SectionHead title={home.route.title} body={home.route.body} />
 
         <div className="mt-14 sm:mt-20">
@@ -31,16 +67,14 @@ export default function HomePage() {
         </div>
 
         {/*
-          The brief's secondary CTA into Services. It sits mid-page, quiet, as a
-          lateral move — not at the page end, where it would compete with the
-          single closing action below.
+          Link into Services page - positioned after the route journey to encourage exploration
         */}
         <div className="mt-14 border-t border-steel pt-6 sm:mt-20">
           <Link
             href="/services"
             className="group inline-flex items-center gap-2 font-mono text-[12px] uppercase tracking-[0.16em] text-mist transition-colors hover:text-signal"
           >
-            All {services.categories.length} things I handle
+            See all freight forwarding services
             <ArrowUpRight
               aria-hidden="true"
               className="size-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
@@ -49,11 +83,19 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* 05 — sample shipment record -------------------------------------- */}
+      {/* 04 — sample shipment record -------------------------------------- */}
       <Section className="py-16 sm:py-24">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-center lg:gap-16">
           <SectionHead title={home.status.title} body={home.status.body} />
           <ShipmentStatus />
+        </div>
+      </Section>
+
+      {/* 05 — who it's for ------------------------------------------------ */}
+      <Section className="py-16 sm:py-24">
+        <SectionHead title={home.whoItsFor.title} body={home.whoItsFor.body} />
+        <div className="mt-10">
+          <WhoItsFor />
         </div>
       </Section>
 
