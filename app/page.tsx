@@ -14,23 +14,23 @@ import { Button } from "@/components/system/Button";
 import { JsonLd } from "@/components/system/JsonLd";
 
 const pageDescription =
-  "TorqueShip provides global freight forwarding and logistics for DTC and e-commerce brands, with direct communication from origin to destination.";
+  "TorqueShip handles freight forwarding for DTC brands, from factory pickup and international freight to customs clearance and delivery to your 3PL.";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "TorqueShip | Global Freight Forwarding for DTC & E-commerce Brands",
+    absolute: "TorqueShip|Freight Forwarding for DTC Brands",
   },
   description: pageDescription,
   openGraph: {
-    title: "TorqueShip | Global Freight Forwarding for DTC & E-commerce Brands",
-    description: pageDescription,
+    title: "TorqueShip|Freight Forwarding for DTC Brands",
+    description: "Freight forwarding for DTC brands, from factory to 3PL.",
     url: `${site.url}/`,
     siteName: site.name,
     type: "website",
   },
   twitter: {
     card: "summary",
-    title: "TorqueShip | Global Freight Forwarding for DTC & E-commerce Brands",
+    title: "TorqueShip|Freight Forwarding for DTC Brands",
     description: pageDescription,
   },
   alternates: { canonical: `${site.url}/` },

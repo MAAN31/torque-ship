@@ -75,7 +75,7 @@ export const home = {
      */
     subhead: {
       lead: "Your freight, handled by the person who answers.",
-      rest: "TorqueShip helps DTC and e-commerce brands move inventory across borders with freight forwarding and logistics managed through one direct point of contact — from origin to destination.",
+      rest: "TorqueShip helps DTC and e-commerce brands move inventory across borders with freight forwarding and logistics managed through one direct point of contact from origin to destination.",
     },
     /** Answers "who is it for" explicitly, as a manifest field. */
     consignee: "DTC & e-commerce brands shipping internationally",
@@ -89,7 +89,7 @@ export const home = {
       box: "01",
       kicker: "DIRECT COMMUNICATION",
       title: "One person to talk to.",
-      body: "No passing customers between departments just to get an answer. The person coordinating your freight is the person in your messages — every time.",
+      body: "No passing customers between departments just to get an answer. The person coordinating your freight is the person in your messages every time.",
     },
     {
       box: "02",
@@ -101,7 +101,7 @@ export const home = {
       box: "03",
       kicker: "GLOBAL COORDINATION",
       title: "Move freight worldwide.",
-      body: "International ocean, air, and ground freight coordinated across global origins and destinations — without managing multiple disconnected providers.",
+      body: "International ocean, air, and ground freight coordinated across global origins and destinations without managing multiple disconnected providers.",
     },
   ],
 
@@ -249,7 +249,7 @@ export const services = {
   intro: {
     title: "Freight Forwarding Services for DTC & E-commerce Brands",
     subhead:
-      "TorqueShip coordinates international freight and logistics for growing DTC and e-commerce brands — from origin pickup through final delivery.",
+      "TorqueShip coordinates international freight and logistics for growing DTC and e-commerce brands from origin pickup through final delivery.",
   },
 
   /** Category names VERBATIM from the brief. Body copy is placeholder. */
@@ -289,7 +289,7 @@ export const services = {
       box: "03",
       name: "Documentation",
       summary: "Commercial documentation prepared correctly the first time.",
-      body: "Every international shipment requires accurate commercial documentation — invoice, packing list, bill of lading, and certificates of origin. TorqueShip reviews supplier documentation before it becomes a problem, ensures all required paperwork is complete and correct, and maintains organized records for each shipment. Proper documentation prevents customs delays, reduces examination risk, and keeps your freight moving on schedule.",
+      body: "Every international shipment requires accurate commercial documentation invoice, packing list, bill of lading, and certificates of origin. TorqueShip reviews supplier documentation before it becomes a problem, ensures all required paperwork is complete and correct, and maintains organized records for each shipment. Proper documentation prevents customs delays, reduces examination risk, and keeps your freight moving on schedule.",
       items: [
         "Commercial invoice and packing list review",
         "Bill of lading coordination and telex release",
@@ -319,7 +319,7 @@ export const services = {
       box: "05",
       name: "When Things Go Sideways",
       summary: "Exception handling and problem resolution when shipments don't go as planned.",
-      body: "Not every shipment goes perfectly. Carriers roll bookings, customs flags containers for inspection, weather delays vessels, suppliers ship incorrect quantities. When problems happen, TorqueShip provides same-day notification with clear options and cost implications. We handle recovery — rebooking rolled shipments, managing customs examinations, coordinating shortage claims, and finding alternative solutions to keep your business moving.",
+      body: "Not every shipment goes perfectly. Carriers roll bookings, customs flags containers for inspection, weather delays vessels, suppliers ship incorrect quantities. When problems happen, TorqueShip provides same-day notification with clear options and cost implications. We handle recovery rebooking rolled shipments, managing customs examinations, coordinating shortage claims, and finding alternative solutions to keep your business moving.",
       items: [
         "Same-day exception notification",
         "Rolled booking recovery and alternative routing",
@@ -333,11 +333,11 @@ export const services = {
 
   pricing: {
     title: "Transparent pricing structure.",
-    body: "TorqueShip charges a flat coordination fee per shipment, plus actual freight and duty costs passed through at cost. You see the carrier invoices — no hidden margins in your freight rates.",
+    body: "TorqueShip charges a flat coordination fee per shipment, plus actual freight and duty costs passed through at cost. You see the carrier invoices no hidden margins in your freight rates.",
     points: [
       { term: "Coordination fee", value: "Flat fee per shipment, quoted upfront" },
       { term: "Freight & duty", value: "Pass-through at cost with invoice transparency" },
-      { term: "Minimum commitment", value: "None — no contracts or volume requirements" },
+      { term: "Minimum commitment", value: "None no contracts or volume requirements" },
       { term: "Getting started", value: "Request a quote to discuss your shipping needs" },
     ],
     cta: { label: "Get a Quote", href: "/get-a-quote" },
@@ -368,7 +368,7 @@ export const why = {
     {
       box: "02",
       title: "Built for DTC brands",
-      body: "TorqueShip understands DTC operations — inventory timing, product launches, replenishment cycles, and seasonal planning. Logistics decisions are made with your brand's needs in mind.",
+      body: "TorqueShip understands DTC operations inventory timing, product launches, replenishment cycles, and seasonal planning. Logistics decisions are made with your brand's needs in mind.",
     },
     {
       box: "03",
@@ -400,7 +400,7 @@ export const why = {
   estimator: {
     title: "Get a Freight Quote",
     subhead:
-      "Tell us about your shipment and we'll help you determine the right freight solution. Fill in what you know — the more details you provide, the more accurate the quote.",
+      "Tell us about your shipment and we'll help you determine the right freight solution. Fill in what you know the more details you provide, the more accurate the quote.",
   },
 
   faq: {
@@ -419,7 +419,7 @@ export const why = {
       {
         question: "What's the difference between FCL and LCL?",
         answer:
-          "FCL (Full Container Load) means you're shipping enough cargo to fill an entire container — typically more cost-effective per unit for larger shipments. LCL (Less than Container Load) means your cargo shares container space with other shippers — better for smaller volumes that don't fill a full container.",
+          "FCL (Full Container Load) means you're shipping enough cargo to fill an entire container typically more cost-effective per unit for larger shipments. LCL (Less than Container Load) means your cargo shares container space with other shippers better for smaller volumes that don't fill a full container.",
       },
       {
         question: "Is there a minimum shipment size?",
