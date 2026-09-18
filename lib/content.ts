@@ -21,12 +21,12 @@ export const PLACEHOLDER = "PLACEHOLDER" as const;
 /* ---------------------------------------------------------------- identity */
 
 export const site = {
-  name: "Torque Ship",
+  name: "TorqueShip",
   /** Shown in the manifest header rule across every page. */
   docType: "FREIGHT FORWARDING / DECLARATION OF SERVICE",
-  tagline: "Asia → US freight, run by one person.",
+  tagline: "Global freight forwarding for DTC Brands.",
   description:
-    "Torque Ship moves DTC and e-commerce inventory from Asian factories to US warehouses. One operator, direct line, landed cost before you commit.",
+    "Global freight forwarding for DTC and e-commerce brands. TorqueShip coordinates international ocean, air, ground, customs and logistics with one direct point of contact.",
   url: "https://torqueship.com",
 };
 
@@ -55,12 +55,12 @@ export const web3formsKey = "d444bedd-1bdb-4250-b893-1e9ba9601258";
 export const nav = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
-  { label: "Why Me", href: "/why" },
+  { label: "Why TorqueShip", href: "/why-torqueship" },
 ];
 
 export const primaryCta = {
-  label: "Get a Rate Quote",
-  href: "/why#estimator",
+  label: "Get a Quote",
+  href: "/get-a-quote",
 };
 
 /* -------------------------------------------------------------------- home */
@@ -68,65 +68,65 @@ export const primaryCta = {
 export const home = {
   hero: {
     /** Answers "what is this" in one line. Keep it short — it is set huge. */
-    headline: ["Your freight,", "handled by the", "person who", "answers."],
+    headline: ["Global Freight", "Forwarding for", " E-commerce", "Brands"],
     /**
      * Answers "who is it for" + "why care". Split so the lead clause — the
      * actual "what is this" claim — can be styled heavier than the rest.
      */
     subhead: {
-      lead: "I move DTC inventory from Asian factories to US warehouses.",
-      rest: "One operator, direct messages, landed cost on the table before you wire a deposit.",
+      lead: "Your freight, handled by the person who answers.",
+      rest: "TorqueShip helps DTC and e-commerce brands move inventory across borders with freight forwarding and logistics managed through one direct point of contact from origin to destination.",
     },
     /** Answers "who is it for" explicitly, as a manifest field. */
-    consignee: "DTC & e-commerce brands importing from Asia",
-    lane: "CN · VN · IN → US",
-    secondaryCta: { label: "See what I actually do", href: "/services" },
+    consignee: "DTC & e-commerce brands shipping internationally",
+    lane: "Global origins → Global destinations",
+    secondaryCta: { label: "See How It Works", href: "#how-it-works" },
   },
 
   /** THREE value props — the skimmable strip. Structure is fixed at 3. */
   valueProps: [
     {
       box: "01",
-      kicker: "DIRECT LINE",
-      title: "You text me. I answer.",
-      body: "Not a ticket queue. Not an account manager who started last month. The person moving your freight is the person in your messages.",
+      kicker: "DIRECT COMMUNICATION",
+      title: "One person to talk to.",
+      body: "No passing customers between departments just to get an answer. The person coordinating your freight is the person in your messages every time.",
     },
     {
       box: "02",
-      kicker: "PRICED UP FRONT",
-      title: "Landed cost before you commit.",
-      body: "Freight, duty, clearance, delivery — real numbers, itemised. If a lane kills your margin, I say so before you pay the factory.",
+      kicker: "BUILT FOR DTC",
+      title: "Freight decisions made with your brand in mind.",
+      body: "Timing, launches, replenishment cycles, and growth. TorqueShip understands DTC operations and makes logistics decisions that support your inventory strategy.",
     },
     {
       box: "03",
-      kicker: "DATES YOU CAN PLAN ON",
-      title: "Inventory dates, not vibes.",
-      body: "You get an arrival window you can build a launch calendar around, and you hear from me the day it slips — not the week after you missed it.",
+      kicker: "GLOBAL COORDINATION",
+      title: "Move freight worldwide.",
+      body: "International ocean, air, and ground freight coordinated across global origins and destinations without managing multiple disconnected providers.",
     },
   ],
 
   /** Scroll-drawn route. One timeline, sea and air merged into it. */
   route: {
-    title: "Factory floor to your 3PL door.",
-    body: "Five handoffs. Every one of them is where a big forwarder loses your container in a queue. I own all five.",
+    title: "From pickup to delivery, handled.",
+    body: "One shipment. One point of contact. Full visibility across the moving pieces — from origin pickup through customs to final delivery.",
     stops: [
-      { code: "ORG", label: "Factory", detail: "Pickup, inspection, cartonisation" },
+      { code: "ORG", label: "Origin Pickup", detail: "Coordination with your supplier, cargo inspection, and documentation prep" },
       {
-        code: "POL",
-        label: "Port or airport of loading",
-        detail: "Booking, VGM or AWB, export clearance",
+        code: "FRT",
+        label: "Freight & Transportation",
+        detail: "Ocean, air, or ground freight booked and tracked with regular status updates",
       },
       {
-        code: "SEA · AIR",
-        label: "Ocean or air leg",
-        detail: "Vessel or flight — tracked and chased daily",
+        code: "CUS",
+        label: "Customs / Import",
+        detail: "Import clearance, duty calculation, and regulatory compliance handled",
       },
       {
-        code: "POD",
-        label: "Port or airport of discharge",
-        detail: "Entry, duty, CBP release",
+        code: "DST",
+        label: "Destination Handling",
+        detail: "Drayage coordination, delivery scheduling, and communication with your warehouse",
       },
-      { code: "DST", label: "Your warehouse", detail: "Drayage, unload, ASN to your 3PL" },
+      { code: "DEL", label: "Final Delivery", detail: "Delivered to your 3PL, warehouse, or fulfillment center with proper documentation" },
     ],
   },
 
@@ -137,10 +137,109 @@ export const home = {
     disclaimer: "Illustrative record. Not live data.",
   },
 
+  services: {
+    title: "Freight forwarding without the runaround.",
+    body: "From the first pickup to final delivery, TorqueShip coordinates the moving pieces of your shipment so you can focus on your brand.",
+    items: [
+      {
+        name: "Ocean Freight",
+        description: "FCL and LCL shipments coordinated across major trade lanes with transparent pricing and regular tracking updates.",
+        href: "/services#sourcing-freight",
+      },
+      {
+        name: "Air Freight",
+        description: "Fast international air cargo for time-sensitive inventory, product launches, or urgent replenishment.",
+        href: "/services#sourcing-freight",
+      },
+      {
+        name: "Ground Transportation",
+        description: "Road freight and drayage coordination from port to warehouse, scheduled around your receiving windows.",
+        href: "/services#last-mile",
+      },
+      {
+        name: "Customs & Import Support",
+        description: "Import clearance, duty calculation, HS classification, and regulatory compliance for international shipments.",
+        href: "/services#customs-compliance",
+      },
+      {
+        name: "Warehousing Coordination",
+        description: "3PL coordination, receiving appointments, and delivery scheduling to keep your inventory flowing.",
+        href: "/services#last-mile",
+      },
+      {
+        name: "Door-to-Door Logistics",
+        description: "Complete end-to-end freight management from supplier pickup through final delivery to your warehouse.",
+        href: "/services",
+      },
+    ],
+  },
+
+  whoItsFor: {
+    title: "Built around the businesses moving inventory.",
+    body: "Whether you're a DTC brand, an Amazon seller, or a 3PL managing inventory for multiple brands, TorqueShip coordinates the freight that keeps products moving.",
+    audiences: [
+      {
+        title: "DTC Brands",
+        body: "Coordinate freight from supplier to destination without managing every moving piece yourself.",
+      },
+      {
+        title: "Amazon Sellers",
+        body: "Move inventory to Amazon and other fulfillment destinations with freight coordinated around your replenishment needs.",
+      },
+      {
+        title: "3PLs & Warehouses",
+        body: "Use TorqueShip to coordinate inbound and outbound freight for your own operation or for the brands you serve.",
+      },
+      {
+        title: "E-commerce Businesses",
+        body: "For growing brands moving inventory internationally, TorqueShip coordinates the freight behind the shipment.",
+      },
+    ],
+  },
+
+  globalReach: {
+    title: "One logistics partner. Worldwide reach.",
+    body: "TorqueShip coordinates international freight for DTC and e-commerce brands across global origin and destination markets.",
+    capabilities: [
+      { label: "Global Origins", detail: "Coordinate pickups from suppliers worldwide" },
+      { label: "Global Destinations", detail: "Deliver to warehouses and fulfillment centers internationally" },
+      { label: "Ocean & Air", detail: "Choose the right freight mode for your timeline and budget" },
+      { label: "Customs Expertise", detail: "Navigate import regulations across different countries" },
+      { label: "End-to-End", detail: "One point of contact from origin through final delivery" },
+    ],
+  },
+
+  whyPreview: {
+    title: "Why brands work with TorqueShip",
+    points: [
+      {
+        title: "One direct point of contact",
+        body: "No passing customers between departments just to get an answer. You know who is handling your freight.",
+      },
+      {
+        title: "Built around DTC operations",
+        body: "Freight decisions are made with inventory timing, launches, replenishment, and growth in mind.",
+      },
+      {
+        title: "Clear communication",
+        body: "Know what's happening with your shipment and who is handling it. No chasing for status updates.",
+      },
+      {
+        title: "Global coordination",
+        body: "Move freight across international origins and destinations without managing multiple disconnected providers.",
+      },
+      {
+        title: "Human accountability",
+        body: "A real person owns the conversation and follows the shipment from start to finish.",
+      },
+    ],
+    cta: { label: "Learn more", href: "/why-torqueship" },
+  },
+
   outro: {
     kicker: "NEXT ACTION",
-    title: "Tell me what you're shipping.",
-    body: "Four questions, no email gate, no call required. I reply with a real rate, same business day.",
+    title: "Have freight to move?",
+    body: "Tell us where it's coming from, where it's going, and what you're shipping. We'll help you figure out the right way to move it.",
   },
 };
 
@@ -148,9 +247,9 @@ export const home = {
 
 export const services = {
   intro: {
-    title: "Freight forwarding services, done by one person.",
+    title: "Freight Forwarding Services for DTC & E-commerce Brands",
     subhead:
-      "Five things. I do all of them myself, which is why there are five and not thirty.",
+      "TorqueShip coordinates international freight and logistics for growing DTC and e-commerce brands from origin pickup through final delivery.",
   },
 
   /** Category names VERBATIM from the brief. Body copy is placeholder. */
@@ -159,13 +258,14 @@ export const services = {
       id: "sourcing-freight",
       box: "01",
       name: "Sourcing & Freight",
-      summary: "Getting it booked, on the water, and moving on schedule.",
-      body: "I book the space, negotiate the rate, and pick the lane that fits your margin and your launch date — not the one with the best kickback. FCL, LCL, and air when the calendar has already gone wrong.",
+      summary: "Ocean, air, and ground freight coordinated for your shipment timeline and budget.",
+      body: "TorqueShip books international freight across ocean (FCL/LCL), air, and ground transportation. We work with established carrier relationships to secure competitive rates and reliable service, then coordinate pickup, documentation, and tracking throughout the journey. Whether it's a full container from an overseas factory or consolidated LCL freight, we match the freight mode to your timeline and cost requirements.",
       items: [
-        "Carrier booking and rate negotiation",
-        "FCL, LCL and air freight",
-        "Factory pickup and cartonisation review",
-        "Consolidation across multiple suppliers",
+        "Ocean freight (FCL and LCL)",
+        "Air freight for time-sensitive shipments",
+        "Ground transportation and drayage",
+        "Carrier selection and rate negotiation",
+        "Origin pickup coordination",
         "Cargo insurance placement",
       ],
     },
@@ -173,70 +273,79 @@ export const services = {
       id: "customs-compliance",
       box: "02",
       name: "Customs & Compliance",
-      summary: "The part that seizes your container if it is done casually.",
-      body: "HS classification that survives an audit, duty and tariff exposure calculated before you commit, and a customs broker relationship that picks up the phone. I keep you out of the exam line, and I get you out fast when you land in it.",
+      summary: "Import clearance and regulatory compliance handled correctly.",
+      body: "Customs clearance can stop your shipment in its tracks if documentation isn't right. TorqueShip handles HS classification, duty calculation, ISF filing, and entry documentation to keep your freight moving through customs. We coordinate with customs brokers, monitor regulatory changes that affect your products, and handle the compliance work so your inventory clears without delays or unexpected fees.",
       items: [
-        "HS code classification and duty exposure",
-        "ISF / 10+2 filing inside the window",
-        "Entry filing and CBP release",
-        "FDA, CPSC and FCC touchpoints where they apply",
-        "Section 301 and tariff-change monitoring",
+        "HS code classification and duty calculation",
+        "ISF (Importer Security Filing) / 10+2 compliance",
+        "Customs entry filing and clearance",
+        "Coordination with licensed customs brokers",
+        "Regulatory compliance (FDA, CPSC, FCC where applicable)",
+        "Tariff monitoring and landed cost analysis",
       ],
     },
     {
       id: "documentation",
       box: "03",
       name: "Documentation",
-      summary: "Paperwork correct the first time, because the second time costs money.",
-      body: "Commercial invoice, packing list, bill of lading, certificate of origin. I check what the factory sends you before it becomes a demurrage bill, because a factory typing your invoice for you is how most first-time importers get burned.",
+      summary: "Commercial documentation prepared correctly the first time.",
+      body: "Every international shipment requires accurate commercial documentation invoice, packing list, bill of lading, and certificates of origin. TorqueShip reviews supplier documentation before it becomes a problem, ensures all required paperwork is complete and correct, and maintains organized records for each shipment. Proper documentation prevents customs delays, reduces examination risk, and keeps your freight moving on schedule.",
       items: [
         "Commercial invoice and packing list review",
-        "Bill of lading issue and telex release",
-        "Certificate of origin and free-trade paperwork",
-        "Supplier document chasing (so you do not do it)",
-        "Full document pack archived per shipment",
+        "Bill of lading coordination and telex release",
+        "Certificate of origin and trade agreement documentation",
+        "Document verification and error prevention",
+        "Supplier document coordination",
+        "Complete documentation archive per shipment",
       ],
     },
     {
       id: "last-mile",
       box: "04",
-      name: "Last-Mile",
-      summary: "Port to pallet position, with your 3PL actually expecting it.",
-      body: "Drayage booked against your warehouse's receiving window, not against whatever the trucker felt like. Your 3PL gets an ASN with real carton counts, so the receiving team is not opening a mystery container on a Friday.",
+      name: "Last-Mile Delivery",
+      summary: "Port to warehouse delivery coordinated with your receiving schedule.",
+      body: "Getting freight from the port to your warehouse requires coordination with trucking companies, warehouses, and sometimes multiple handoffs. TorqueShip schedules drayage around your warehouse receiving windows, coordinates with your 3PL or fulfillment center, and provides advance shipping notices so receiving teams know what's arriving. Whether it's Amazon FBA, a 3PL warehouse, or your own facility, we handle the delivery coordination.",
       items: [
-        "Drayage and container return",
-        "Transload and palletisation",
-        "3PL appointment booking and ASN",
-        "Amazon FBA / AWD routing and prep rules",
-        "Overflow storage when receiving is backed up",
+        "Drayage scheduling and coordination",
+        "Warehouse appointment booking",
+        "3PL coordination and advance shipping notices",
+        "Amazon FBA and AWD delivery coordination",
+        "Transload and palletization when needed",
+        "Final delivery confirmation and documentation",
       ],
     },
     {
       id: "when-things-go-sideways",
       box: "05",
       name: "When Things Go Sideways",
-      summary: "The category nobody advertises, and the only one that matters.",
-      body: "Rolled bookings, customs exams, port strikes, a factory that shipped 40 cartons short. It happens on every lane eventually. You get told the same day, with the options and what each one costs — not a status page and an apology two weeks later.",
+      summary: "Exception handling and problem resolution when shipments don't go as planned.",
+      body: "Not every shipment goes perfectly. Carriers roll bookings, customs flags containers for inspection, weather delays vessels, suppliers ship incorrect quantities. When problems happen, TorqueShip provides same-day notification with clear options and cost implications. We handle recovery rebooking rolled shipments, managing customs examinations, coordinating shortage claims, and finding alternative solutions to keep your business moving.",
       items: [
         "Same-day exception notification",
-        "Rolled booking recovery and re-routing",
-        "Customs exam handling and cost containment",
-        "Damage and shortage claims",
-        "Contingency air-freight splits to protect a launch",
+        "Rolled booking recovery and alternative routing",
+        "Customs examination coordination",
+        "Damage and shortage documentation and claims",
+        "Expedited air freight for urgent situations",
+        "Contingency planning for supply chain disruptions",
       ],
     },
   ],
 
   pricing: {
-    title: "How I charge.",
-    body: "Flat fee per shipment plus pass-through cost at cost. I show you the carrier invoice. There is no margin buried in your freight rate, which is the entire reason people leave their last forwarder.",
+    title: "Transparent pricing structure.",
+    body: "TorqueShip charges a flat coordination fee per shipment, plus actual freight and duty costs passed through at cost. You see the carrier invoices no hidden margins in your freight rates.",
     points: [
-      { term: "Per-shipment fee", value: "Flat, quoted up front" },
-      { term: "Freight & duty", value: "Pass-through at cost, invoice shown" },
-      { term: "Minimum commitment", value: "None. Ship one container." },
-      { term: "Contract", value: "None. Leave whenever." },
+      { term: "Coordination fee", value: "Flat fee per shipment, quoted upfront" },
+      { term: "Freight & duty", value: "Pass-through at cost with invoice transparency" },
+      { term: "Minimum commitment", value: "None no contracts or volume requirements" },
+      { term: "Getting started", value: "Request a quote to discuss your shipping needs" },
     ],
-    cta: { label: "Book a 15-minute call", href: contact.calendly },
+    cta: { label: "Get a Quote", href: "/get-a-quote" },
+  },
+
+  howServicesWork: {
+    title: "How our services work together",
+    body: "Most DTC shipments need multiple services working in coordination. A typical international shipment involves origin pickup, ocean or air freight, customs clearance, and final delivery to your warehouse. TorqueShip coordinates all of these pieces as one continuous process with a single point of contact, rather than separate vendors you manage independently.",
   },
 };
 
@@ -244,32 +353,37 @@ export const services = {
 
 export const why = {
   intro: {
-    title: "One-person freight forwarding. That is the pitch.",
+    title: "Freight forwarding with a person behind it.",
     subhead:
-      "Big forwarders sell you a platform and hand you a queue. Here is what you get instead, stated plainly enough that you can hold me to it.",
+      "TorqueShip's approach to freight forwarding is built around direct communication and personal accountability. Here's what that means in practice.",
   },
 
   /** Trust points — skimmable, fixed structure. */
   trustPoints: [
     {
       box: "01",
-      title: "You always know who is accountable.",
-      body: "There is one name on every shipment and it does not change. No handoff between the sales rep who closed you and the ops team who resents you.",
+      title: "One person to talk to",
+      body: "Direct communication with the person coordinating your freight. No ticket systems, no account manager handoffs, no department transfers. You know who is handling your shipment.",
     },
     {
       box: "02",
-      title: "I show you the carrier invoice.",
-      body: "Freight and duty pass through at cost. My fee is the fee. You can audit every shipment against the underlying documents.",
+      title: "Built for DTC brands",
+      body: "TorqueShip understands DTC operations inventory timing, product launches, replenishment cycles, and seasonal planning. Logistics decisions are made with your brand's needs in mind.",
     },
     {
       box: "03",
-      title: "I tell you the bad news first.",
-      body: "Exceptions get reported the day I know, with the options and what each one costs. Nobody has ever been happy to find out late.",
+      title: "Clear communication",
+      body: "Regular status updates and same-day notification when exceptions occur. Know what's happening with your freight without having to chase for information.",
     },
     {
       box: "04",
-      title: "I say no to lanes that do not work.",
-      body: "If the freight math kills your unit economics, I would rather tell you than book it and let you discover it at landing.",
+      title: "Accountability from origin to destination",
+      body: "One point of contact owns the entire shipment from supplier pickup through warehouse delivery. When something needs attention, you know exactly who to reach.",
+    },
+    {
+      box: "05",
+      title: "Global coordination",
+      body: "Coordinate international freight across origins and destinations worldwide without managing multiple freight forwarders in different regions.",
     },
   ],
 
@@ -284,33 +398,43 @@ export const why = {
   },
 
   estimator: {
-    title: "Tell me what you're shipping.",
+    title: "Get a Freight Quote",
     subhead:
-      "Fill in what you know — nothing here is required except your email. The more you can give me, the more accurate the number I send back.",
+      "Tell us about your shipment and we'll help you determine the right freight solution. Fill in what you know the more details you provide, the more accurate the quote.",
   },
 
   faq: {
-    title: "Questions people actually ask.",
+    title: "Frequently asked questions.",
     items: [
       {
-        question: "What's the difference between FOB, DDP, and DDU?",
+        question: "What types of freight does TorqueShip handle?",
         answer:
-          "FOB (Free On Board) means your responsibility starts once cargo is loaded at the origin port — you own freight, insurance, and destination costs from there. DDP (Delivered Duty Paid) means the forwarder handles everything, duty included, all the way to your door. DDU (Delivered Duty Unpaid, often called DAP today) means delivery is handled end to end, but you pay duty and taxes separately at destination.",
+          "TorqueShip coordinates ocean freight (FCL and LCL), air freight, and ground transportation for international shipments. We work with DTC and e-commerce brands moving inventory from suppliers to warehouses or fulfillment centers.",
       },
       {
-        question: "How long does ocean freight from Asia to the US typically take?",
+        question: "Do you only handle shipments from Asia to the US?",
         answer:
-          "Roughly 3–6 weeks port to port, depending on the origin port, destination coast, and season. Add a few more days on each end for origin pickup and destination drayage.",
+          "TorqueShip coordinates international freight across global origins and destinations. We work with brands shipping from and to various countries worldwide.",
+      },
+      {
+        question: "What's the difference between FCL and LCL?",
+        answer:
+          "FCL (Full Container Load) means you're shipping enough cargo to fill an entire container typically more cost-effective per unit for larger shipments. LCL (Less than Container Load) means your cargo shares container space with other shippers better for smaller volumes that don't fill a full container.",
       },
       {
         question: "Is there a minimum shipment size?",
         answer:
-          "No minimum. I'll move a few pallets by LCL or a full container by FCL — whatever fits your order.",
+          "No minimum shipment size. Whether you're shipping a few pallets via LCL or multiple full containers, TorqueShip can coordinate your freight.",
       },
       {
-        question: "What does \"flat fee plus pass-through\" mean?",
+        question: "Do I need a customs broker?",
         answer:
-          "You pay one flat fee for my work. The actual freight, duty, and carrier costs pass through to you at cost, and I show you the carrier invoice — there's no margin hidden inside the freight rate.",
+          "TorqueShip coordinates with licensed customs brokers to handle import clearance, ISF filing, duty calculation, and customs documentation. This is included in our coordination services.",
+      },
+      {
+        question: "What happens if something goes wrong with my shipment?",
+        answer:
+          "You get same-day notification when exceptions occur rolled bookings, customs holds, delays, or damage. We explain what happened, provide options for resolution, and handle the coordination to get your freight back on track.",
       },
     ],
   },
@@ -319,8 +443,12 @@ export const why = {
 /* ------------------------------------------------------------------ footer */
 
 export const footer = {
-  note: "Torque Ship is one person. That is the point.",
+  note: "TorqueShip helps DTC and e-commerce brands move inventory around the world with freight forwarding and logistics handled through one direct point of contact.",
   // Static, not `new Date()` — this module is imported by client components and
   // a server/client year boundary would produce a hydration mismatch.
-  legal: "© 2026 Torque Ship. Rates illustrative until confirmed in writing.",
+  legal: "© 2026 TorqueShip",
+  legalLinks: [
+    { label: "Privacy Policy", href: "/privacy-policy" },
+    { label: "Terms & Conditions", href: "/terms-and-conditions" },
+  ],
 };

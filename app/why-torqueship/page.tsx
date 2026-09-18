@@ -10,24 +10,27 @@ import { Faq } from "@/components/why/Faq";
 import { QuoteEstimator } from "@/components/quote/QuoteEstimator";
 
 const description =
-  "One operator, direct line, landed cost before you commit. Price your lane with the estimator, then decide whether to call.";
+  "See why DTC and e-commerce brands choose TorqueShip for direct communication, global freight coordination, and hands-on shipment management.";
 
 export const metadata: Metadata = {
-  title: "Why Me",
+  title: {
+    absolute: "Why TorqueShip | Freight Forwarding for DTC Brands",
+  },
   description,
   openGraph: {
-    title: `Why Me — ${site.name}`,
+    title: "Why TorqueShip | Freight Forwarding for DTC Brands",
     description,
-    url: `${site.url}/why`,
+    url: `${site.url}/why-torqueship/`,
     siteName: site.name,
     type: "website",
   },
   twitter: {
     card: "summary",
-    title: `Why Me — ${site.name}`,
+    title: "Why TorqueShip | Freight Forwarding for DTC Brands",
     description,
   },
-  alternates: { canonical: `${site.url}/why` },
+  alternates: { canonical: `${site.url}/why-torqueship/` },
+  robots: { index: true, follow: true },
 };
 
 export default function WhyPage() {

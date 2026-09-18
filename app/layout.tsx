@@ -5,7 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { StickyCta } from "@/components/layout/StickyCta";
 import { JsonLd } from "@/components/system/JsonLd";
 import { site } from "@/lib/content";
-import { organizationSchema } from "@/lib/schema";
+import { organizationSchema, websiteSchema } from "@/lib/schema";
 import "./globals.css";
 
 /**
@@ -31,23 +31,19 @@ const jetbrains = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — ${site.tagline}`,
-    template: `%s — ${site.name}`,
+    // Homepage overrides this with its own explicit `metadata` export.
+    // Inner pages that don't set a title will get "Page Name | TorqueShip".
+    default: `${site.name} | Global Freight Forwarding for DTC & E-commerce Brands`,
+    template: `%s | ${site.name}`,
   },
   description: site.description,
   openGraph: {
-    title: `${site.name} — ${site.tagline}`,
-    description: site.description,
-    url: site.url,
     siteName: site.name,
     type: "website",
   },
   twitter: {
     card: "summary",
-    title: `${site.name} — ${site.tagline}`,
-    description: site.description,
   },
-  alternates: { canonical: site.url },
   robots: { index: true, follow: true },
 };
 
@@ -61,6 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${archivo.variable} ${jetbrains.variable}`}>
       <body className="min-h-dvh antialiased">
         <JsonLd data={organizationSchema} />
+        <JsonLd data={websiteSchema} />
 
         <a
           href="#main"

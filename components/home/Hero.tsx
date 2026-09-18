@@ -1,14 +1,9 @@
-"use client";
-
-import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, ArrowDown } from "lucide-react";
 import { home, primaryCta, site, contact } from "@/lib/content";
 import { Button } from "@/components/system/Button";
 import { Stamp } from "@/components/system/Stamp";
 import { Field, FieldRow } from "@/components/system/Field";
 import { Container } from "@/components/system/Section";
-import { EASE } from "@/lib/motion";
-import { currentQuarter } from "@/lib/quarter";
 
 /**
  * ABOVE THE FOLD. Answers three questions before a founder can scroll past:
@@ -24,20 +19,10 @@ import { currentQuarter } from "@/lib/quarter";
  * performance budget holds.
  */
 export function Hero() {
-  const reduced = useReducedMotion();
   // Computed on the visitor's clock, not baked in at build time — this is a
   // fully static export with no scheduled rebuild, so a hardcoded quarter
   // would silently go stale between deploys.
-  const bookingStatus = `ACCEPTING Q${currentQuarter()} BOOKINGS`;
-
-  const rise = (delay: number) =>
-    reduced
-      ? { initial: false as const, animate: { opacity: 1, y: 0 } }
-      : {
-          initial: { opacity: 0, y: 12 },
-          animate: { opacity: 1, y: 0 },
-          transition: { duration: 0.6, ease: EASE, delay },
-        };
+  const bookingStatus = "NOW ACCEPTING NEW BOOKINGS";
 
   return (
     <section className="relative overflow-hidden">
@@ -52,9 +37,9 @@ export function Hero() {
 
       <Container className="relative pb-14 pt-12 sm:pb-20 sm:pt-16 lg:pb-24 lg:pt-20">
         {/* Document header rule */}
-        <motion.div
-          {...rise(0)}
-          className="flex flex-wrap items-center justify-between gap-4 border-b border-steel pb-4"
+        <div
+          className="flex flex-wrap items-center justify-between gap-4 border-b border-steel pb-4 animate-fade-in-up"
+          style={{ animationDelay: '0ms' }}
         >
           <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-faint sm:text-[11px]">
             {site.docType}
@@ -62,9 +47,9 @@ export function Hero() {
           <Stamp tone="signal" rotate={-3} live>
             {bookingStatus}
           </Stamp>
-        </motion.div>
+        </div>
 
-        {/* LCP element — static by design. */}
+        {/* LCP element — static by design. H1 is SEO-optimized for "Global Freight Forwarding for DTC & E-commerce Brands" */}
         <h1 className="mt-8 font-display text-[clamp(2.75rem,11vw,7.5rem)] font-extrabold leading-[0.88] tracking-[-0.045em] text-paper sm:mt-10">
           {home.hero.headline.map((line, i) => (
             <span key={line} className="block">
@@ -77,15 +62,21 @@ export function Hero() {
           ))}
         </h1>
 
-        <motion.p
-          {...rise(0.1)}
-          className="mt-7 max-w-[54ch] text-[16px] leading-relaxed sm:text-[19px]"
+        <p
+          className="mt-7 max-w-[54ch] text-[16px] leading-relaxed sm:text-[19px] animate-fade-in-up"
+          style={{ animationDelay: '100ms' }}
         >
-          <span className="font-medium text-paper">{home.hero.subhead.lead}</span>{" "}
-          <span className="text-mist">{home.hero.subhead.rest}</span>
-        </motion.p>
+          <span className="font-medium text-paper">{home.hero.subhead.lead}</span>
+        </p>
 
-        <motion.div {...rise(0.18)} className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+        <p
+          className="mt-4 max-w-[54ch] text-[16px] leading-relaxed text-mist sm:text-[18px] animate-fade-in-up"
+          style={{ animationDelay: '150ms' }}
+        >
+          {home.hero.subhead.rest}
+        </p>
+
+        <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center animate-fade-in-up" style={{ animationDelay: '180ms' }}>
           <Button
             href={primaryCta.href}
             size="lg"
@@ -104,10 +95,10 @@ export function Hero() {
           >
             {home.hero.secondaryCta.label}
           </Button>
-        </motion.div>
+        </div>
 
         {/* Who it's for, stated as a form field rather than buried in prose. */}
-        <motion.div {...rise(0.26)} className="mt-12 sm:mt-16">
+        <div className="mt-12 sm:mt-16 animate-fade-in-up" style={{ animationDelay: '260ms' }}>
           <FieldRow cols={3}>
             <Field box="01" label="Consignee">
               {home.hero.consignee}
@@ -119,7 +110,7 @@ export function Hero() {
               {contact.responseWindow}
             </Field>
           </FieldRow>
-        </motion.div>
+        </div>
       </Container>
     </section>
   );
