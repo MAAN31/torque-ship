@@ -20,19 +20,19 @@ export function Nav() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-steel bg-ink/85 backdrop-blur-md supports-[backdrop-filter]:bg-ink/70">
-      <div className="mx-auto flex h-14 w-full max-w-[1240px] items-center justify-between gap-4 px-5 sm:h-16 sm:px-8 lg:px-12">
+      <div className="mx-auto flex h-14 w-full max-w-[1240px] items-center justify-between gap-1.5 px-3 sm:h-16 sm:gap-4 sm:px-8 lg:px-12">
         <Link
           href="/"
-          className="group flex shrink-0 items-center gap-2.5"
+          className="group flex shrink-0 items-center gap-1.5 sm:gap-2.5"
           aria-label={`${site.name} — home`}
         >
           <Mark />
-          <span className="font-display text-[15px] font-extrabold uppercase leading-none tracking-[-0.02em] text-paper sm:text-base">
+          <span className="font-display text-[13.5px] font-extrabold uppercase leading-none tracking-[-0.02em] text-paper sm:text-base">
             Torque<span className="text-signal">Ship</span>
           </span>
         </Link>
 
-        <nav aria-label="Primary" className="flex items-center gap-4 sm:gap-7">
+        <nav aria-label="Primary" className="flex items-center gap-2 sm:gap-7">
           {nav.map((item) => {
             const active =
               item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
@@ -42,7 +42,7 @@ export function Nav() {
                 href={item.href}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "group relative py-2 font-mono text-[11px] uppercase tracking-[0.16em] transition-colors sm:text-[12px]",
+                  "group relative py-2 font-mono text-[10px] uppercase tracking-[0.08em] transition-colors sm:text-[12px] sm:tracking-[0.16em]",
                   active ? "text-signal" : "text-mist hover:text-paper"
                 )}
               >
@@ -60,14 +60,15 @@ export function Nav() {
         </nav>
 
         {/* Desktop CTA. Mobile gets the bottom bar instead. */}
-        <Button
-          href={primaryCta.href}
-          size="sm"
-          className="hidden md:inline-flex"
-          trailing={<ArrowUpRight aria-hidden="true" className="size-3.5" />}
-        >
-          {primaryCta.label}
-        </Button>
+        <div className="hidden md:block">
+          <Button
+            href={primaryCta.href}
+            size="sm"
+            trailing={<ArrowUpRight aria-hidden="true" className="size-3.5" />}
+          >
+            {primaryCta.label}
+          </Button>
+        </div>
       </div>
     </header>
   );
