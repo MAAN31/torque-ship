@@ -65,8 +65,8 @@ export default function WhyPage() {
 
       {/* Closing conversion moment — exactly one action --------------------- */}
       <Section id="estimator" className="scroll-mt-20 py-16 sm:py-24">
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-16">
-          <div className="lg:sticky lg:top-28 lg:self-start">
+        <div className="grid min-w-0 gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-16">
+          <div className="min-w-0 lg:sticky lg:top-28 lg:self-start">
             <SectionHead
               title={why.estimator.title}
               body={why.estimator.subhead}
@@ -98,7 +98,9 @@ export default function WhyPage() {
             </div>
           </div>
 
-          <QuoteEstimator />
+          <div className="min-w-0">
+            <QuoteEstimator />
+          </div>
         </div>
       </Section>
     </>

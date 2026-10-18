@@ -181,7 +181,7 @@ export function QuoteEstimator() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-8 border border-steel bg-graphite p-5 sm:p-8"
+      className="flex min-w-0 flex-col gap-8 border border-steel bg-graphite p-5 sm:p-8"
     >
       <p className="font-mono text-[11px] uppercase leading-relaxed tracking-[0.2em] text-faint">
         Fill in what you know — nothing here is required except your email.
@@ -379,7 +379,7 @@ function TextField({
 }) {
   const id = useId();
   const inputClasses =
-    "mt-2 w-full border border-steel bg-ink px-4 py-3 font-mono text-[14px] text-paper placeholder:text-steel-hi focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-signal";
+    "mt-2 w-full border border-steel bg-ink px-4 py-3 font-mono text-[16px] text-paper placeholder:text-steel-hi focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-signal sm:text-[14px]";
 
   return (
     <div className="min-w-0 flex-1">
@@ -430,7 +430,7 @@ function ChoiceField<T extends string>({
   onChange: (value: T) => void;
 }) {
   return (
-    <div>
+    <div className="min-w-0">
       <span className="block font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
         {label}
       </span>
@@ -439,7 +439,7 @@ function ChoiceField<T extends string>({
           const id = `${name}-${o.id}`;
           const checked = value === o.id;
           return (
-            <div key={o.id}>
+            <div key={o.id} className="min-w-0 max-w-full">
               <input
                 type="radio"
                 id={id}
@@ -452,7 +452,7 @@ function ChoiceField<T extends string>({
               <label
                 htmlFor={id}
                 className={cn(
-                  "flex min-h-[44px] cursor-pointer select-none items-center border px-4 font-mono text-[13px] uppercase tracking-[0.08em] transition-colors",
+                  "flex min-h-[44px] max-w-full cursor-pointer select-none items-center border px-4 font-mono text-[12px] uppercase tracking-[0.08em] transition-colors break-words sm:text-[13px]",
                   checked
                     ? "border-signal bg-signal-wash text-signal"
                     : "border-steel text-mist hover:border-steel-hi hover:text-paper",
