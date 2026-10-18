@@ -8,9 +8,6 @@
 
 import { contact, site } from "./content";
 
-const LINKEDIN_URL = "https://www.linkedin.com/company/torqueship/";
-
-/** Site-wide — rendered once in the root layout, present on every page. */
 export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -19,7 +16,15 @@ export const organizationSchema = {
   logo: `${site.url}/torqueship-logo.svg`,
   email: contact.email,
   description: "Global freight forwarding and logistics for DTC and e-commerce brands",
-  sameAs: [LINKEDIN_URL],
+  sameAs: [contact.linkedin],
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "800 N King St suit 304",
+    addressLocality: "Wilmington",
+    addressRegion: "DE",
+    postalCode: "19801",
+    addressCountry: "USA",
+  },
 };
 
 export function faqSchema(faq: { question: string; answer: string }[]) {

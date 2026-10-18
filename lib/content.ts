@@ -40,6 +40,8 @@ export const contact = {
   phoneHref: "tel:+15550128840", // PLACEHOLDER — UI hidden until this is real
   calendly: "https://calendar.app.google/H1tfdN1s3jbNDYLM8",
   responseWindow: "Same business day, usually under 2 hours.",
+  linkedin: "https://www.linkedin.com/company/torqueship/home/",
+  address: "800 N King St suit 304, Wilmington, DE 19801, USA",
 };
 
 /**
