@@ -43,11 +43,11 @@ export function Card({
 function RegistrationMarks() {
   const base = "pointer-events-none absolute size-2 border-signal/0 transition-colors duration-300 group-hover:border-signal/70";
   return (
-    <span aria-hidden="true">
-      <span className={cn(base, "left-[-1px] top-[-1px] border-l-2 border-t-2")} />
-      <span className={cn(base, "right-[-1px] top-[-1px] border-r-2 border-t-2")} />
-      <span className={cn(base, "bottom-[-1px] left-[-1px] border-b-2 border-l-2")} />
-      <span className={cn(base, "bottom-[-1px] right-[-1px] border-b-2 border-r-2")} />
+    <span aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+      <span className={cn(base, "left-0 top-0 border-l-2 border-t-2")} />
+      <span className={cn(base, "right-0 top-0 border-r-2 border-t-2")} />
+      <span className={cn(base, "bottom-0 left-0 border-b-2 border-l-2")} />
+      <span className={cn(base, "bottom-0 right-0 border-b-2 border-r-2")} />
     </span>
   );
 }
